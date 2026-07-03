@@ -245,11 +245,21 @@ ul { list-style: none; }
   animation: sheen 24s linear infinite;
 }
 @keyframes sheen { to { transform: rotate(1turn); } }
-.hero-media video { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; }
+.hero-media video, .hero-media img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; }
+.pillar-media img, .bento-photo img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; }
+.value-photo img { width: 100%; height: 100%; object-fit: cover; }
+.bento-photo::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border: 1px solid var(--glass);
+  border-radius: inherit;
+  pointer-events: none;
+}
 .hero-scrim {
   position: absolute;
   inset: 0;
-  background: linear-gradient(180deg, rgba(8,22,20,0.55) 0%, rgba(8,22,20,0.25) 45%, var(--bg) 100%);
+  background: linear-gradient(180deg, rgba(8,22,20,0.6) 0%, rgba(8,22,20,0.45) 45%, var(--bg) 100%);
 }
 .hero-content {
   position: relative;
@@ -535,12 +545,13 @@ ul { list-style: none; }
   <!-- ============ 2. HERO ============ -->
   <section class="hero">
     <div class="hero-media" aria-hidden="true">
-      <!-- PLACEHOLDER: replace this gradient block with your hero video, e.g.
+      <!-- PLACEHOLDER: stock photo (Unsplash) — replace with your hero video, e.g.
       <video autoplay muted loop playsinline poster="media/hero-poster.jpg">
         <source src="media/hero.mp4" type="video/mp4">
       </video>
       -->
       <div class="hero-media-placeholder"><div class="hero-sheen"></div></div>
+      <img src="https://images.unsplash.com/photo-1679055324332-189b4a7bc99e?q=80&w=1920&auto=format&fit=crop" alt="">
       <div class="hero-scrim"></div>
     </div>
     <div class="hero-content">
@@ -563,8 +574,9 @@ ul { list-style: none; }
       <div style="margin-top: clamp(3rem, 7vw, 5.5rem);">
         <article class="pillar">
           <div class="pillar-media reveal">
-            <!-- PLACEHOLDER: swap for looping video or photo of vehicles -->
+            <!-- PLACEHOLDER: stock photo (Unsplash) — swap for your own fleet footage -->
             <div class="pillar-media-placeholder">Fleet video / image</div>
+            <img src="https://images.unsplash.com/photo-1771207895109-0c09d6cd3f9b?q=80&w=1200&auto=format&fit=crop" alt="Electric delivery van parked at night" loading="lazy">
           </div>
           <div>
             <h3 class="reveal">Fleet electrification</h3>
@@ -580,8 +592,9 @@ ul { list-style: none; }
 
         <article class="pillar">
           <div class="pillar-media reveal">
-            <!-- PLACEHOLDER: swap for depot charging footage -->
+            <!-- PLACEHOLDER: stock photo (Unsplash) — swap for your depot charging footage -->
             <div class="pillar-media-placeholder">Charging video / image</div>
+            <img src="https://images.unsplash.com/photo-1593941707874-ef25b8b4a92b?q=80&w=1200&auto=format&fit=crop" alt="Charging cable plugged into an electric vehicle" loading="lazy">
           </div>
           <div>
             <h3 class="reveal">Charging infrastructure</h3>
@@ -597,8 +610,9 @@ ul { list-style: none; }
 
         <article class="pillar">
           <div class="pillar-media reveal">
-            <!-- PLACEHOLDER: swap for telematics dashboard footage -->
+            <!-- PLACEHOLDER: stock photo (Unsplash) — swap for your telematics dashboard footage -->
             <div class="pillar-media-placeholder">Intelligence video / image</div>
+            <img src="https://images.unsplash.com/photo-1585014165903-6d6c6ebad3e9?q=80&w=1200&auto=format&fit=crop" alt="Digital vehicle instrument cluster at dusk" loading="lazy">
           </div>
           <div>
             <h3 class="reveal">Fleet intelligence</h3>
@@ -623,28 +637,28 @@ ul { list-style: none; }
     </div>
     <div class="values-track" role="list">
       <div class="value-card reveal" role="listitem">
-        <div class="value-photo"></div><!-- PLACEHOLDER: photo -->
+        <div class="value-photo"><img src="https://images.unsplash.com/photo-1643701079732-3b1c7a797e3d?q=80&w=800&auto=format&fit=crop" alt="Technician servicing the underside of a vehicle" loading="lazy"></div><!-- PLACEHOLDER: Unsplash stock — swap for brand photo -->
         <div class="value-caption">
           <strong>Uptime, above all</strong>
           <span>Spares, service crews, and swap vehicles on standby — your schedule never waits on us.</span>
         </div>
       </div>
       <div class="value-card reveal" role="listitem" style="--stagger: 1">
-        <div class="value-photo"></div><!-- PLACEHOLDER: photo -->
+        <div class="value-photo"><img src="https://images.unsplash.com/photo-1532463788086-56a492a0b34a?q=80&w=800&auto=format&fit=crop" alt="Long-exposure light trails on a highway at night" loading="lazy"></div><!-- PLACEHOLDER: Unsplash stock — swap for brand photo -->
         <div class="value-caption">
           <strong>Built for the long haul</strong>
           <span>Ten-year asset plans, not twelve-month pilots.</span>
         </div>
       </div>
       <div class="value-card reveal" role="listitem" style="--stagger: 2">
-        <div class="value-photo"></div><!-- PLACEHOLDER: photo -->
+        <div class="value-photo"><img src="https://images.unsplash.com/photo-1664382953403-fc1ac77073a0?q=80&w=800&auto=format&fit=crop" alt="Two colleagues reviewing notes in a logistics warehouse" loading="lazy"></div><!-- PLACEHOLDER: Unsplash stock — swap for brand photo -->
         <div class="value-caption">
           <strong>One accountable partner</strong>
           <span>Vehicles, chargers, and software under a single contract and a single phone number.</span>
         </div>
       </div>
       <div class="value-card reveal" role="listitem" style="--stagger: 3">
-        <div class="value-photo"></div><!-- PLACEHOLDER: photo -->
+        <div class="value-photo"><img src="https://images.unsplash.com/photo-1621872111378-4f8340e9cb90?q=80&w=800&auto=format&fit=crop" alt="Lush green forest seen from above" loading="lazy"></div><!-- PLACEHOLDER: Unsplash stock — swap for brand photo -->
         <div class="value-caption">
           <strong>Measured in tonnes saved</strong>
           <span>Every engagement reports verified emissions avoided, not estimates.</span>
@@ -678,8 +692,9 @@ ul { list-style: none; }
       <h2 class="display-2 reveal" style="--stagger: 1">The numbers behind the quiet</h2>
       <div class="bento">
         <div class="bento-cell bento-photo bento-tall reveal">
-          <!-- PLACEHOLDER: portrait photo of a driver or depot team -->
+          <!-- PLACEHOLDER: Unsplash stock — swap for a portrait of your driver or depot team -->
           <div class="bento-photo-placeholder">Portrait photo</div>
+          <img src="https://images.unsplash.com/photo-1631798262744-5c15818c2e92?q=80&w=800&auto=format&fit=crop" alt="Bus driver at the wheel during a night shift" loading="lazy">
         </div>
         <div class="bento-cell reveal" style="--stagger: 1">
           <span class="num" data-count="240" data-suffix="+">240+</span>
@@ -690,8 +705,9 @@ ul { list-style: none; }
           <span class="label">Fleet uptime</span>
         </div>
         <div class="bento-cell bento-photo bento-tall reveal" style="--stagger: 3">
-          <!-- PLACEHOLDER: portrait photo of a vehicle at dusk -->
+          <!-- PLACEHOLDER: Unsplash stock — swap for a portrait of a vehicle at dusk -->
           <div class="bento-photo-placeholder">Portrait photo</div>
+          <img src="https://images.unsplash.com/photo-1753264073167-e266a10385f9?q=80&w=800&auto=format&fit=crop" alt="Cars on a tree-lined road at dusk" loading="lazy">
         </div>
         <div class="bento-cell reveal" style="--stagger: 1">
           <span class="num" data-count="38">38</span>
