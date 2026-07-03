@@ -1,1525 +1,797 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Powering Green — Amagi Carriage | Series A 2026</title>
-  <meta name="description" content="Amagi Carriage delivers end-to-end EV fleet solutions for Singapore's commercial transport operators. Series A — Closing June 30, 2026.">
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Syne:wght@700;800&family=Roboto:wght@400;500;600;700;900&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;1,9..40,300&display=swap" rel="stylesheet">
-  <script src="https://cdn.tailwindcss.com"></script>
-  <script>
-    tailwind.config = {
-      theme: {
-        extend: {
-          colors: {
-            brand: {
-              green: '#1A4D3A',
-              'green-mid': '#2D6A4F',
-              sage: '#E8EDE8',
-              'sage-light': '#F0F4F0',
-              gold: '#B08D3C',
-              'gold-light': '#FBF5E6',
-            },
-            bg: { primary: '#F7F6F2', card: '#FFFFFF' },
-            tx: { primary: '#1C1C1E', mid: '#4B5563', muted: '#9CA3AF' },
-            bdr: { DEFAULT: '#E2E4DF' },
-          },
-          fontFamily: {
-            syne: ['Roboto', 'sans-serif'],
-            dm: ['DM Sans', 'sans-serif'],
-          },
-        }
-      }
-    }
-  </script>
-  <style>
-    *, *::before, *::after { box-sizing: border-box; }
-    html { scroll-behavior: smooth; }
-    body { background-color: #F7F6F2; color: #1C1C1E; font-family: 'DM Sans', sans-serif; overflow-x: hidden; }
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Amagi Carriage — Electric Fleet Solutions</title>
+<meta name="description" content="Amagi Carriage delivers end-to-end electric fleet solutions for Singapore's commercial transport operators — vehicles, charging infrastructure, and fleet intelligence.">
 
-    /* Fade-up animation */
-    .fade-up { opacity: 0; transform: translateY(24px); transition: opacity 0.5s ease-out, transform 0.5s ease-out; }
-    .fade-up.visible { opacity: 1; transform: translateY(0); }
-    .fade-up.d1 { transition-delay: 0ms; }
-    .fade-up.d2 { transition-delay: 100ms; }
-    .fade-up.d3 { transition-delay: 200ms; }
-    .fade-up.d4 { transition-delay: 300ms; }
-    .fade-up.d5 { transition-delay: 400ms; }
-    .fade-up.d6 { transition-delay: 500ms; }
+<!-- Satoshi variable font via Fontshare. Falls back to system grotesque if offline. -->
+<link rel="preconnect" href="https://api.fontshare.com">
+<link href="https://api.fontshare.com/v2/css?f[]=satoshi@300,400,500,700&display=swap" rel="stylesheet">
 
-    /* Nav */
-    #nav { transition: background 200ms ease, border-color 200ms ease, box-shadow 200ms ease; }
-    #nav.scrolled { background: #fff !important; border-bottom: 1px solid #E2E4DF; box-shadow: 0 1px 8px rgba(0,0,0,0.04); }
-    #nav.scrolled .nav-link { color: #4B5563; }
-    #nav.scrolled .nav-link:hover, #nav.scrolled .nav-link.active { color: #1A4D3A; }
-    #nav.scrolled .nav-logo { color: #1C1C1E; }
-    #nav.scrolled .nav-cta { background: #1A4D3A; color: #fff; border-color: #1A4D3A; }
-    #nav.scrolled .nav-cta:hover { background: #2D6A4F; border-color: #2D6A4F; }
-    #nav.scrolled .mobile-btn { color: #1C1C1E; }
+<style>
+/* ============================================================
+   THEME — retint the whole site from this one block
+   ============================================================ */
+:root {
+  --bg: #081614;                    /* near-black, dark teal-green undertone */
+  --fg: #FFFFFF;                    /* primary text */
+  --accent: #E9D7B1;                /* champagne gold — headlines, key accents */
+  --accent-alt: #E8C583;            /* secondary gold */
+  --accent-alt-2: #FBDDAF;          /* lightest gold */
+  --bronze: rgba(109, 87, 50, 0.77);/* muted secondary, used sparingly */
+  --glass: rgba(255, 255, 255, 0.08);
+  --glass-strong: rgba(255, 255, 255, 0.14);
+  --muted: rgba(255, 255, 255, 0.64);
+  --scrim: rgba(8, 22, 20, 0.92);
 
-    /* Cards */
-    .card { background: #fff; border: 1px solid #E2E4DF; border-radius: 12px; box-shadow: 0 2px 12px rgba(0,0,0,0.06); transition: box-shadow 200ms ease, transform 200ms ease; cursor: default; }
-    .card:hover { box-shadow: 0 8px 32px rgba(0,0,0,0.10); transform: translateY(-2px); }
-    .card-accent { border-top: 3px solid #1A4D3A; }
+  --font-sans: "Satoshi", "Helvetica Neue", "Segoe UI", system-ui, sans-serif;
 
-    /* Buttons */
-    .btn-primary { background: #1A4D3A; color: #fff; border: 1px solid #1A4D3A; border-radius: 8px; padding: 12px 24px; font-family: 'DM Sans', sans-serif; font-weight: 500; font-size: 15px; letter-spacing: 0.02em; cursor: pointer; transition: background 150ms ease, border-color 150ms ease; display: inline-block; text-decoration: none; }
-    .btn-primary:hover { background: #2D6A4F; border-color: #2D6A4F; }
-    .btn-secondary { background: #fff; color: #1A4D3A; border: 1px solid #1A4D3A; border-radius: 8px; padding: 12px 24px; font-family: 'DM Sans', sans-serif; font-weight: 500; font-size: 15px; letter-spacing: 0.02em; cursor: pointer; transition: background 150ms ease; display: inline-block; text-decoration: none; }
-    .btn-secondary:hover { background: #F0F4F0; }
-    .btn-ghost { background: transparent; color: #fff; border: 1px solid rgba(255,255,255,0.6); border-radius: 8px; padding: 12px 24px; font-family: 'DM Sans', sans-serif; font-weight: 500; font-size: 15px; letter-spacing: 0.02em; cursor: pointer; transition: border-color 150ms ease, background 150ms ease; display: inline-block; text-decoration: none; }
-    .btn-ghost:hover { border-color: #fff; background: rgba(255,255,255,0.08); }
-    .btn-white-green { background: #fff; color: #1A4D3A; border: 1px solid #fff; border-radius: 8px; padding: 12px 24px; font-family: 'DM Sans', sans-serif; font-weight: 500; font-size: 15px; letter-spacing: 0.02em; cursor: pointer; transition: background 150ms ease; display: inline-block; text-decoration: none; }
-    .btn-white-green:hover { background: #F0F4F0; }
+  --display-1: clamp(2.6rem, 1rem + 6.2vw, 5.125rem);   /* hero ~82px */
+  --display-2: clamp(2.1rem, 1rem + 4.4vw, 4rem);       /* sections ~64px */
+  --section-gap: clamp(120px, 14vw, 200px);
+  --container: 1240px;
+  --radius-card: 20px;
+  --radius-pill: 40px;
 
-    /* Hero texture */
-    .hero-texture { background-image: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23225c47' fill-opacity='0.18'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E"); }
+  --ease-out: cubic-bezier(0.22, 1, 0.36, 1);
+  --z-nav: 50; --z-overlay: 30; --z-raised: 20; --z-base: 10;
+}
 
-    /* Gold financial highlight */
-    .gold-val { color: #B08D3C; font-family: 'Roboto', sans-serif; font-weight: 700; }
-    .gold-bg { background: #FBF5E6; }
+/* ============================================================
+   BASE
+   ============================================================ */
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; }
+body {
+  background: var(--bg);
+  color: var(--fg);
+  font-family: var(--font-sans);
+  font-weight: 400;
+  font-size: 1rem;
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+  overflow-x: hidden;
+}
+img, video { display: block; max-width: 100%; }
+a { color: inherit; text-decoration: none; }
+ul { list-style: none; }
 
-    /* Timeline */
-    .timeline-line { position: relative; }
-    .timeline-line::before { content: ''; position: absolute; top: 20px; left: 0; right: 0; height: 2px; background: #E2E4DF; }
+::selection { background: var(--accent); color: var(--bg); }
 
-    /* Donut chart */
-    .donut-ring { transform-origin: center; transform: rotate(-90deg); }
+:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 3px;
+  border-radius: 4px;
+}
 
-    /* Form */
-    .form-input { width: 100%; background: #fff; border: 1px solid #E2E4DF; border-radius: 8px; padding: 12px 16px; font-family: 'DM Sans', sans-serif; font-size: 16px; color: #1C1C1E; outline: none; transition: border-color 150ms ease; }
-    .form-input:focus { border-color: #1A4D3A; box-shadow: 0 0 0 3px rgba(26,77,58,0.08); }
-    .form-input::placeholder { color: #9CA3AF; }
-    label { font-family: 'DM Sans', sans-serif; font-size: 13px; font-weight: 500; color: #4B5563; display: block; margin-bottom: 6px; }
+.container {
+  width: min(var(--container), 100% - 3rem);
+  margin-inline: auto;
+}
 
-    /* Mobile nav overlay */
-    #mobile-menu { display: none; }
-    #mobile-menu.open { display: flex; }
+.section { padding-block: calc(var(--section-gap) / 2); }
 
-    /* Section padding */
-    .section-pad { padding-top: 120px; padding-bottom: 120px; }
-    @media (max-width: 1024px) { .section-pad { padding-top: 64px; padding-bottom: 64px; } }
-    @media (max-width: 768px) { .section-pad { padding-top: 48px; padding-bottom: 48px; } }
+/* Display type */
+.display-1, .display-2 {
+  font-weight: 300;
+  letter-spacing: -0.04em;
+  text-transform: capitalize;
+  text-wrap: balance;
+}
+.display-1 { font-size: var(--display-1); line-height: 1.3; color: var(--accent); }
+.display-2 { font-size: var(--display-2); line-height: 1.07; }
 
-    /* Drag scroll — horizontal grab-and-slide strips */
-    .drag-scroll { display:flex; overflow-x:auto; scroll-snap-type:x mandatory; cursor:grab; -webkit-overflow-scrolling:touch; scrollbar-width:none; padding-bottom:4px; }
-    .drag-scroll::-webkit-scrollbar { display:none; }
-    .drag-scroll > * { scroll-snap-align:start; flex-shrink:0; }
-    .drag-scroll.is-dragging { cursor:grabbing; user-select:none; }
-    .drag-hint { display:inline-flex; align-items:center; gap:6px; font-family:'DM Sans',sans-serif; font-size:12px; color:#9CA3AF; margin-bottom:14px; user-select:none; }
-    .drag-hint svg { opacity:0.55; }
+.eyebrow {
+  display: inline-block;
+  font-size: 0.75rem;
+  font-weight: 500;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: var(--accent-alt);
+  margin-bottom: 1.25rem;
+}
+.lede { color: var(--muted); max-width: 34rem; }
 
-    /* Stat counter */
-    .stat-num { font-family: 'Roboto', sans-serif; font-weight: 900; }
+/* ============================================================
+   GLASSMORPHISM BUTTON — transparent bg, blur, gradient border
+   ============================================================ */
+.btn {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.6rem;
+  min-height: 48px;
+  padding: 0.85rem 1.9rem;
+  border: 0;
+  border-radius: var(--radius-pill);
+  background: rgba(255, 255, 255, 0.03);
+  -webkit-backdrop-filter: blur(12px);
+  backdrop-filter: blur(12px);
+  color: var(--fg);
+  font-family: inherit;
+  font-size: 0.85rem;
+  font-weight: 500;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  cursor: pointer;
+  transition: background 250ms var(--ease-out), color 250ms var(--ease-out);
+}
+/* Diagonal gradient border: white fading to transparent */
+.btn::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  padding: 1px;
+  background: linear-gradient(135deg, rgba(255,255,255,0.55), rgba(255,255,255,0.06) 55%, rgba(255,255,255,0.18));
+  -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+  -webkit-mask-composite: xor;
+          mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+          mask-composite: exclude;
+  pointer-events: none;
+}
+.btn:hover { background: rgba(255, 255, 255, 0.09); }
+.btn--gold { color: var(--accent); }
+.btn--gold::before {
+  background: linear-gradient(135deg, rgba(233,215,177,0.65), rgba(233,215,177,0.08) 55%, rgba(233,215,177,0.25));
+}
+.btn--gold:hover { background: rgba(233, 215, 177, 0.1); }
+.btn .btn-arrow { transition: transform 250ms var(--ease-out); }
+.btn:hover .btn-arrow { transform: translateX(4px); }
 
-    /* Trust bar */
-    .trust-logo { font-family: 'Roboto', sans-serif; font-weight: 700; font-size: 13px; letter-spacing: 0.08em; color: #9CA3AF; text-transform: uppercase; }
+/* ============================================================
+   SCROLL REVEAL
+   ============================================================ */
+.reveal {
+  opacity: 0;
+  transform: translateY(20px);
+  transition: opacity 700ms var(--ease-out), transform 700ms var(--ease-out);
+  transition-delay: calc(var(--stagger, 0) * 100ms);
+}
+.reveal.is-visible { opacity: 1; transform: none; }
 
-    /* Responsive hero headline */
-    .hero-headline { font-family: 'Syne', sans-serif; font-weight: 800; font-size: clamp(28px, 3.4vw, 54px); line-height: 1.12; letter-spacing: -0.02em; color: #fff; }
-    .nav-logo { font-family: 'Syne', sans-serif !important; }
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+  .reveal { opacity: 1; transform: none; transition: none; }
+  .marquee-track { animation: none !important; }
+  .hero-sheen { animation: none !important; }
+}
 
-    /* Reduced motion */
-    @media (prefers-reduced-motion: reduce) {
-      .fade-up { opacity: 1; transform: none; transition: none; }
-      * { transition-duration: 0ms !important; animation-duration: 0ms !important; }
-    }
+/* ============================================================
+   1. NAV
+   ============================================================ */
+.nav {
+  position: fixed;
+  inset: 0 0 auto 0;
+  z-index: var(--z-nav);
+  transition: background 300ms var(--ease-out), border-color 300ms var(--ease-out);
+  border-bottom: 1px solid transparent;
+}
+.nav.is-scrolled {
+  background: rgba(8, 22, 20, 0.72);
+  -webkit-backdrop-filter: blur(16px);
+  backdrop-filter: blur(16px);
+  border-bottom-color: var(--glass);
+}
+.nav-inner {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 2rem;
+  min-height: 76px;
+}
+.nav-logo {
+  font-size: 1rem;
+  font-weight: 700;
+  letter-spacing: 0.28em;
+  text-transform: uppercase;
+}
+.nav-logo span { color: var(--accent); font-weight: 300; }
+.nav-links {
+  display: flex;
+  align-items: center;
+  gap: 2.25rem;
+  font-size: 0.72rem;
+  font-weight: 500;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+}
+.nav-links a {
+  color: var(--muted);
+  padding: 0.5rem 0;
+  transition: color 200ms var(--ease-out);
+}
+.nav-links a:hover { color: var(--accent); }
+.nav-lang {
+  min-height: 40px;
+  padding: 0.5rem 1.1rem;
+  font-size: 0.72rem;
+}
+@media (max-width: 860px) {
+  .nav-links { display: none; } /* keep it minimal on mobile; hero CTA carries the action */
+}
 
-    /* Scroll indicator bounce */
-    @keyframes bounce-slow { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(6px); } }
-    .bounce-slow { animation: bounce-slow 2s ease-in-out infinite; }
-    @media (prefers-reduced-motion: reduce) { .bounce-slow { animation: none; } }
-  </style>
+/* ============================================================
+   2. HERO
+   ============================================================ */
+.hero {
+  position: relative;
+  min-height: 100svh;
+  display: grid;
+  place-items: center;
+  text-align: center;
+  overflow: hidden;
+}
+.hero-media {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+}
+/* PLACEHOLDER: swap this gradient block for your hero video (see commented <video> in HTML) */
+.hero-media-placeholder {
+  position: absolute;
+  inset: 0;
+  background:
+    radial-gradient(120% 90% at 70% 10%, rgba(233,215,177,0.10), transparent 55%),
+    radial-gradient(90% 70% at 15% 85%, rgba(109,87,50,0.28), transparent 60%),
+    linear-gradient(180deg, #0B1F1C 0%, var(--bg) 70%);
+}
+.hero-sheen {
+  position: absolute;
+  inset: -40%;
+  background: conic-gradient(from 180deg at 50% 50%, transparent 70%, rgba(233,215,177,0.05) 82%, transparent 94%);
+  animation: sheen 24s linear infinite;
+}
+@keyframes sheen { to { transform: rotate(1turn); } }
+.hero-media video { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; }
+.hero-scrim {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(180deg, rgba(8,22,20,0.55) 0%, rgba(8,22,20,0.25) 45%, var(--bg) 100%);
+}
+.hero-content {
+  position: relative;
+  z-index: var(--z-base);
+  padding: 8rem 1.5rem 6rem;
+  max-width: 62rem;
+}
+.hero-content .lede { margin: 1.75rem auto 2.75rem; }
+
+/* ============================================================
+   3. PILLARS
+   ============================================================ */
+.pillar {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: clamp(2.5rem, 6vw, 6rem);
+  align-items: center;
+}
+.pillar + .pillar { margin-top: calc(var(--section-gap) * 0.65); }
+.pillar:nth-child(even) .pillar-media { order: 2; }
+.pillar-media {
+  position: relative;
+  aspect-ratio: 4 / 3;
+  border-radius: var(--radius-card);
+  overflow: hidden;
+}
+/* PLACEHOLDER: swap each .pillar-media-placeholder for a real <video muted autoplay loop playsinline> or <img> */
+.pillar-media-placeholder {
+  position: absolute;
+  inset: 0;
+  display: grid;
+  place-items: center;
+  color: var(--bronze);
+  font-size: 0.72rem;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  background: linear-gradient(150deg, #0D2420, #081614 60%, #0A1D1A);
+}
+.pillar-media::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  border: 1px solid var(--glass);
+  pointer-events: none;
+}
+.pillar h3 {
+  font-size: clamp(1.6rem, 1rem + 1.8vw, 2.4rem);
+  font-weight: 300;
+  letter-spacing: -0.02em;
+  color: var(--accent);
+  margin-bottom: 1rem;
+}
+.pillar p { color: var(--muted); margin-bottom: 1.75rem; max-width: 30rem; }
+.checklist { display: grid; gap: 0.85rem; }
+.checklist li {
+  display: flex;
+  align-items: center;
+  gap: 0.8rem;
+  font-size: 0.95rem;
+}
+.checklist svg { flex: none; color: var(--accent-alt); }
+@media (max-width: 820px) {
+  .pillar { grid-template-columns: 1fr; }
+  .pillar:nth-child(even) .pillar-media { order: 0; }
+}
+
+/* ============================================================
+   4. VALUES — horizontal scroll cards
+   ============================================================ */
+.values-track {
+  display: grid;
+  grid-auto-flow: column;
+  grid-auto-columns: clamp(280px, 32vw, 420px);
+  gap: 1.25rem;
+  overflow-x: auto;
+  padding: 2.5rem 1.5rem 1.5rem;
+  scroll-snap-type: x mandatory;
+  scrollbar-width: none;
+}
+.values-track::-webkit-scrollbar { display: none; }
+.value-card {
+  position: relative;
+  aspect-ratio: 3 / 4;
+  border-radius: var(--radius-card);
+  overflow: hidden;
+  scroll-snap-align: center;
+  cursor: pointer;
+}
+/* PLACEHOLDER: give each card a real photo via .value-card > img (object-fit: cover) */
+.value-photo {
+  position: absolute;
+  inset: 0;
+  transition: transform 600ms var(--ease-out);
+}
+.value-card:nth-child(1) .value-photo { background: linear-gradient(160deg, #16352F, #081614); }
+.value-card:nth-child(2) .value-photo { background: linear-gradient(200deg, #2A2416, #081614); }
+.value-card:nth-child(3) .value-photo { background: linear-gradient(140deg, #102A26, #0A1210); }
+.value-card:nth-child(4) .value-photo { background: linear-gradient(190deg, #1F1A10, #0A1614); }
+.value-card:hover .value-photo { transform: scale(1.04); }
+.value-caption {
+  position: absolute;
+  inset: auto 0 0 0;
+  z-index: var(--z-base);
+  padding: 4.5rem 1.75rem 1.75rem;
+  background: linear-gradient(180deg, transparent, var(--scrim));
+}
+.value-caption strong {
+  display: block;
+  font-size: 1.25rem;
+  font-weight: 700;
+  letter-spacing: -0.01em;
+  margin-bottom: 0.35rem;
+}
+.value-caption span { font-size: 0.9rem; color: var(--muted); }
+
+/* ============================================================
+   5. LOGO MARQUEE
+   ============================================================ */
+.marquee {
+  overflow: hidden;
+  border-block: 1px solid var(--glass);
+  padding-block: 2.5rem;
+  -webkit-mask-image: linear-gradient(90deg, transparent, #fff 12%, #fff 88%, transparent);
+          mask-image: linear-gradient(90deg, transparent, #fff 12%, #fff 88%, transparent);
+}
+.marquee-track {
+  display: flex;
+  width: max-content;
+  gap: 5rem;
+  animation: marquee 36s linear infinite;
+}
+.marquee:hover .marquee-track { animation-play-state: paused; }
+@keyframes marquee { to { transform: translateX(-50%); } }
+/* PLACEHOLDER: swap each .marquee-logo for a real grayscale <img> logo (~32px tall) */
+.marquee-logo {
+  flex: none;
+  display: flex;
+  align-items: center;
+  gap: 5rem;
+  font-size: 1rem;
+  font-weight: 700;
+  letter-spacing: 0.3em;
+  text-transform: uppercase;
+  color: rgba(255, 255, 255, 0.35);
+  white-space: nowrap;
+  filter: grayscale(1);
+}
+
+/* ============================================================
+   6. STATS BENTO
+   ============================================================ */
+.bento {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  grid-auto-rows: minmax(180px, auto);
+  gap: 1.25rem;
+  margin-top: 3.5rem;
+}
+.bento-cell {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  gap: 0.35rem;
+  padding: 2rem;
+  border-radius: var(--radius-card);
+  background: rgba(255, 255, 255, 0.03);
+  border: 1px solid var(--glass);
+}
+.bento-cell .num {
+  font-size: clamp(2.4rem, 1.4rem + 2.6vw, 3.8rem);
+  font-weight: 300;
+  letter-spacing: -0.03em;
+  line-height: 1;
+  color: var(--accent);
+}
+.bento-cell .label {
+  font-size: 0.78rem;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--muted);
+}
+.bento-photo {
+  position: relative;
+  padding: 0;
+  border: 0;
+  overflow: hidden;
+  min-height: 320px;
+}
+/* PLACEHOLDER: swap for real portrait photography (<img> with object-fit: cover) */
+.bento-photo-placeholder {
+  position: absolute;
+  inset: 0;
+  display: grid;
+  place-items: center;
+  color: var(--bronze);
+  font-size: 0.72rem;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  background: linear-gradient(165deg, #14312B, #081614 75%);
+  border-radius: inherit;
+  border: 1px solid var(--glass);
+}
+.bento-tall { grid-row: span 3; }
+.bento-wide { grid-column: span 2; }
+@media (max-width: 980px) {
+  .bento { grid-template-columns: repeat(2, 1fr); }
+  .bento-tall { grid-row: span 2; }
+}
+@media (max-width: 540px) {
+  .bento { grid-template-columns: 1fr; }
+  .bento-wide { grid-column: auto; }
+  .bento-tall { grid-row: auto; min-height: 320px; }
+}
+
+/* ============================================================
+   7. CLOSING CTA
+   ============================================================ */
+.closing {
+  text-align: center;
+  padding-block: var(--section-gap);
+}
+.closing .lede { margin: 1.5rem auto 2.75rem; }
+.closing-actions {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 1rem;
+}
+
+/* ============================================================
+   8. FOOTER
+   ============================================================ */
+.footer {
+  border-top: 1px solid var(--glass);
+  padding-block: 3rem;
+}
+.footer-inner {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1.5rem;
+}
+.footer a { color: var(--muted); transition: color 200ms var(--ease-out); }
+.footer a:hover { color: var(--accent); }
+.footer-social { display: flex; gap: 0.5rem; }
+.footer-social a {
+  display: grid;
+  place-items: center;
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  border: 1px solid var(--glass);
+}
+.footer-copy {
+  width: 100%;
+  margin-top: 1.5rem;
+  font-size: 0.78rem;
+  color: rgba(255, 255, 255, 0.4);
+}
+</style>
 </head>
 <body>
 
-<!-- ============================================================ NAV ============================================================ -->
-<nav id="nav" class="fixed top-0 left-0 right-0 z-50" style="background: transparent;" aria-label="Main navigation">
-  <div class="max-w-[1200px] mx-auto px-6 flex items-center justify-between h-16">
-    <!-- Logo -->
-    <a href="#hero" class="nav-logo flex items-center gap-2 font-syne font-bold text-2xl text-white no-underline" aria-label="Powering Green home">
-      <span class="w-2 h-2 rounded-full bg-[#4ade80] flex-shrink-0" aria-hidden="true"></span>
-      Powering Green
-      <span class="hidden sm:inline font-dm font-normal text-sm" style="color: rgba(168,213,181,0.7);">/ Amagi Carriage</span>
-    </a>
-
-    <!-- Desktop nav links -->
-    <div class="hidden lg:flex items-center gap-6">
-      <a href="#problem"    class="nav-link font-dm text-sm text-white/80 hover:text-white transition-colors duration-200 cursor-pointer" data-section="problem">Problem</a>
-      <a href="#market"     class="nav-link font-dm text-sm text-white/80 hover:text-white transition-colors duration-200 cursor-pointer" data-section="market">Market</a>
-      <a href="#solution"   class="nav-link font-dm text-sm text-white/80 hover:text-white transition-colors duration-200 cursor-pointer" data-section="solution">Solution</a>
-      <a href="#financials" class="nav-link font-dm text-sm text-white/80 hover:text-white transition-colors duration-200 cursor-pointer" data-section="financials">Financials</a>
-      <a href="#team"       class="nav-link font-dm text-sm text-white/80 hover:text-white transition-colors duration-200 cursor-pointer" data-section="team">Team</a>
-      <a href="#contact"    class="nav-link font-dm text-sm text-white/80 hover:text-white transition-colors duration-200 cursor-pointer" data-section="contact">Contact</a>
-    </div>
-
-    <!-- CTA -->
-    <div class="flex items-center gap-3">
-      <a href="#contact" class="nav-cta btn-ghost text-sm px-4 py-2 hidden lg:inline-block">Request Data Room</a>
-      <!-- Mobile hamburger -->
-      <button id="hamburger" class="mobile-btn lg:hidden text-white p-2 cursor-pointer" aria-label="Open menu" aria-expanded="false">
-        <svg width="22" height="22" viewBox="0 0 22 22" fill="none" aria-hidden="true">
-          <rect y="3" width="22" height="2" rx="1" fill="currentColor"/>
-          <rect y="10" width="22" height="2" rx="1" fill="currentColor"/>
-          <rect y="17" width="22" height="2" rx="1" fill="currentColor"/>
-        </svg>
-      </button>
-    </div>
+<!-- ============ 1. NAV ============ -->
+<header class="nav" id="nav">
+  <div class="container nav-inner">
+    <a class="nav-logo" href="#top" aria-label="Amagi Carriage — home">Amagi<span>&nbsp;Carriage</span></a>
+    <nav class="nav-links" aria-label="Primary">
+      <a href="#solutions">Solutions</a>
+      <a href="#approach">Approach</a>
+      <a href="#partners">Partners</a>
+      <a href="#impact">Impact</a>
+      <a href="#contact">Contact</a>
+    </nav>
+    <button class="btn nav-lang" type="button" aria-label="Switch language to Chinese">EN / 中文</button>
   </div>
-</nav>
+</header>
 
-<!-- Mobile menu overlay -->
-<div id="mobile-menu" class="fixed inset-0 z-40 flex-col bg-brand-green" role="dialog" aria-modal="true" aria-label="Mobile navigation">
-  <div class="flex items-center justify-between px-6 h-16">
-    <span class="font-syne font-bold text-lg text-white">Powering Green</span>
-    <button id="close-menu" class="text-white p-2 cursor-pointer" aria-label="Close menu">
-      <svg width="22" height="22" viewBox="0 0 22 22" fill="none" aria-hidden="true">
-        <path d="M1 1l20 20M21 1L1 21" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
-      </svg>
-    </button>
-  </div>
-  <nav class="flex-1 flex flex-col items-center justify-center gap-8">
-    <a href="#problem"    class="font-syne text-2xl font-semibold text-white" onclick="closeMobileMenu()">Problem</a>
-    <a href="#market"     class="font-syne text-2xl font-semibold text-white" onclick="closeMobileMenu()">Market</a>
-    <a href="#solution"   class="font-syne text-2xl font-semibold text-white" onclick="closeMobileMenu()">Solution</a>
-    <a href="#financials" class="font-syne text-2xl font-semibold text-white" onclick="closeMobileMenu()">Financials</a>
-    <a href="#team"       class="font-syne text-2xl font-semibold text-white" onclick="closeMobileMenu()">Team</a>
-    <a href="#contact"    class="font-syne text-2xl font-semibold text-white" onclick="closeMobileMenu()">Contact</a>
-  </nav>
-  <div class="px-6 pb-10">
-    <a href="#contact" class="btn-white-green w-full text-center block" onclick="closeMobileMenu()">Request Data Room</a>
-  </div>
-</div>
+<main id="top">
 
-<!-- ============================================================ 01 HERO ============================================================ -->
-<section id="hero" class="relative min-h-screen flex flex-col justify-center hero-texture" style="background-color: #1A4D3A; overflow:hidden;" aria-labelledby="hero-headline">
-  <canvas id="hero-canvas" class="absolute inset-0 w-full h-full pointer-events-none" aria-hidden="true"></canvas>
-  <div class="max-w-[1200px] mx-auto px-6 pt-24 pb-20 w-full">
-    <div class="max-w-5xl">
-      <!-- Label -->
-      <div class="fade-up d1 mb-6">
-        <span class="font-dm font-medium text-xs uppercase tracking-[0.12em]" style="color: rgba(168,213,181,0.8);">Series A · Closing June 30, 2026</span>
-      </div>
-
-      <!-- Headline -->
-      <h1 id="hero-headline" class="hero-headline fade-up d1 mb-6">
-        Singapore's EV<br>
-        Mandate Is Law.<br>
-        We're the Infrastructure<br>
-        <span style="color: #6BCF97;">It Needs.</span>
-      </h1>
-
-      <!-- Subheadline -->
-      <p class="fade-up d2 font-dm font-light text-lg leading-relaxed mb-10 max-w-xl" style="color: #A8D5B5;">
-        Amagi Carriage delivers end-to-end EV fleet solutions — vehicle resale, solar charging, and parts supply — for Singapore's commercial transport operators.
-      </p>
-
-      <!-- Stats -->
-      <div class="fade-up d3 flex flex-wrap gap-0 mb-10">
-        <div class="pr-8 mr-8 border-r border-white/20 last:border-0 last:pr-0 last:mr-0 mb-4">
-          <div class="stat-num text-5xl text-white" data-count="260" data-prefix="$" data-suffix="B">$260B</div>
-          <div class="font-dm text-sm mt-1" style="color: rgba(168,213,181,0.8);">Global Market</div>
-        </div>
-        <div class="pr-8 mr-8 border-r border-white/20 last:border-0 last:pr-0 last:mr-0 mb-4">
-          <div class="stat-num text-5xl text-white" data-count="5800" data-prefix="" data-suffix="">5,800</div>
-          <div class="font-dm text-sm mt-1" style="color: rgba(168,213,181,0.8);">Buses to Electrify</div>
-        </div>
-        <div class="mb-4">
-          <div class="stat-num text-5xl" style="color: #B08D3C;">25–30%</div>
-          <div class="font-dm text-sm mt-1" style="color: rgba(168,213,181,0.8);">Blended Margin (target)</div>
-        </div>
-      </div>
-
-      <!-- CTAs -->
-      <div class="fade-up d4 flex flex-wrap gap-4 items-center">
-        <a href="#contact" class="btn-white-green">Request Data Room</a>
-        <a href="#contact" class="btn-ghost">View the Deck</a>
+  <!-- ============ 2. HERO ============ -->
+  <section class="hero">
+    <div class="hero-media" aria-hidden="true">
+      <!-- PLACEHOLDER: replace this gradient block with your hero video, e.g.
+      <video autoplay muted loop playsinline poster="media/hero-poster.jpg">
+        <source src="media/hero.mp4" type="video/mp4">
+      </video>
+      -->
+      <div class="hero-media-placeholder"><div class="hero-sheen"></div></div>
+      <div class="hero-scrim"></div>
+    </div>
+    <div class="hero-content">
+      <h1 class="display-1 reveal">Every kilometre,<br>electrified.</h1>
+      <p class="lede reveal" style="--stagger: 1">End-to-end electric fleet solutions for Singapore's commercial transport operators — vehicles, charging, and intelligence under one roof.</p>
+      <div class="reveal" style="--stagger: 2">
+        <a class="btn btn--gold" href="#contact">Book a consultation
+          <svg class="btn-arrow" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="M5 12h14m-6-6 6 6-6 6"/></svg>
+        </a>
       </div>
     </div>
-  </div>
+  </section>
 
-  <!-- Scroll indicator -->
-  <div class="absolute bottom-8 left-1/2 -translate-x-1/2 bounce-slow" aria-hidden="true">
-    <a href="#problem" class="flex flex-col items-center gap-2 cursor-pointer">
-      <span class="font-dm text-xs" style="color: rgba(168,213,181,0.6);">Scroll</span>
-      <svg width="20" height="20" viewBox="0 0 20 20" fill="none" aria-hidden="true">
-        <path d="M10 4v12M4 10l6 6 6-6" stroke="rgba(168,213,181,0.6)" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
-      </svg>
-    </a>
-  </div>
-</section>
+  <!-- ============ 3. THREE PILLARS ============ -->
+  <section class="section" id="solutions">
+    <div class="container">
+      <p class="eyebrow reveal">What we deliver</p>
+      <h2 class="display-2 reveal" style="--stagger: 1">One partner for the whole transition</h2>
 
-<!-- ============================================================ 02 PROBLEM ============================================================ -->
-<section id="problem" class="section-pad" style="background: #F7F6F2;" aria-labelledby="problem-headline">
-  <div class="max-w-[1200px] mx-auto px-6">
-    <!-- Header -->
-    <div class="max-w-2xl mb-16 fade-up">
-      <span class="font-dm font-medium text-xs uppercase tracking-[0.12em] text-tx-muted mb-3 block">02 / The Problem</span>
-      <h2 id="problem-headline" class="font-syne font-bold text-5xl md:text-6xl text-tx-primary leading-tight mb-4">The Mandate Is Set.<br>The Infrastructure Isn't.</h2>
-      <p class="font-dm text-lg text-tx-mid leading-relaxed">Singapore has legislated a full EV transition. The commercial fleet operators tasked with executing it have no integrated partner to make it happen.</p>
-    </div>
-
-    <!-- Pain point cards -->
-    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5 mb-16">
-      <div class="card card-accent p-6 fade-up d1">
-        <div class="mb-4" aria-hidden="true">
-          <svg width="32" height="32" viewBox="0 0 32 32" fill="none">
-            <rect width="32" height="32" rx="8" fill="#F0F4F0"/>
-            <path d="M16 8v8l5 3" stroke="#1A4D3A" stroke-width="2" stroke-linecap="round"/>
-            <circle cx="16" cy="16" r="8" stroke="#1A4D3A" stroke-width="2"/>
-          </svg>
-        </div>
-        <h3 class="font-syne font-semibold text-lg text-tx-primary mb-2">Upfront Cost</h3>
-        <p class="font-dm text-sm text-tx-mid leading-relaxed">EV buses cost S$250K–S$400K each. Fleet operators lack capital access and structured financing pathways.</p>
-      </div>
-      <div class="card card-accent p-6 fade-up d2">
-        <div class="mb-4" aria-hidden="true">
-          <svg width="32" height="32" viewBox="0 0 32 32" fill="none">
-            <rect width="32" height="32" rx="8" fill="#F0F4F0"/>
-            <path d="M8 12h4m4 0h8M8 16h8m4 0h4M8 20h4m4 0h8" stroke="#1A4D3A" stroke-width="2" stroke-linecap="round"/>
-          </svg>
-        </div>
-        <h3 class="font-syne font-semibold text-lg text-tx-primary mb-2">Supply Chain Fragmentation</h3>
-        <p class="font-dm text-sm text-tx-mid leading-relaxed">Vehicles, chargers, and parts come from separate vendors with no single point of accountability.</p>
-      </div>
-      <div class="card card-accent p-6 fade-up d3">
-        <div class="mb-4" aria-hidden="true">
-          <svg width="32" height="32" viewBox="0 0 32 32" fill="none">
-            <rect width="32" height="32" rx="8" fill="#F0F4F0"/>
-            <path d="M10 22v-8l6-6 6 6v8M13 22v-5h6v5" stroke="#1A4D3A" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-          </svg>
-        </div>
-        <h3 class="font-syne font-semibold text-lg text-tx-primary mb-2">Charging Infrastructure</h3>
-        <p class="font-dm text-sm text-tx-mid leading-relaxed">Depot-scale fast charging requires solar integration and grid upgrades that operators can't self-fund or manage.</p>
-      </div>
-      <div class="card card-accent p-6 fade-up d4">
-        <div class="mb-4" aria-hidden="true">
-          <svg width="32" height="32" viewBox="0 0 32 32" fill="none">
-            <rect width="32" height="32" rx="8" fill="#F0F4F0"/>
-            <circle cx="16" cy="13" r="4" stroke="#1A4D3A" stroke-width="2"/>
-            <path d="M8 26c0-4.418 3.582-8 8-8s8 3.582 8 8" stroke="#1A4D3A" stroke-width="2" stroke-linecap="round"/>
-          </svg>
-        </div>
-        <h3 class="font-syne font-semibold text-lg text-tx-primary mb-2">Operator Complexity</h3>
-        <p class="font-dm text-sm text-tx-mid leading-relaxed">Operators must manage LTA compliance, OEM relationships, and software platforms simultaneously — without dedicated EV expertise.</p>
-      </div>
-    </div>
-
-    <!-- Key stat -->
-    <div class="gold-bg rounded-2xl p-6 md:p-8 mb-16 fade-up flex flex-col md:flex-row items-center gap-6">
-      <div class="text-center md:text-left">
-        <div class="font-syne font-bold text-6xl gold-val">240</div>
-        <div class="font-dm text-sm text-tx-mid mt-1">electric buses today</div>
-      </div>
-      <div class="hidden md:block w-px h-16 bg-[#E2E4DF]"></div>
-      <div class="text-center md:text-left">
-        <div class="font-syne font-bold text-6xl" style="color:#1A4D3A;">5,800</div>
-        <div class="font-dm text-sm text-tx-mid mt-1">needed by 2030</div>
-      </div>
-      <div class="hidden md:block w-px h-16 bg-[#E2E4DF]"></div>
-      <div class="flex-1 text-center md:text-left">
-        <p class="font-dm text-base text-tx-mid leading-relaxed">Singapore needs to electrify <strong class="text-tx-primary">97% of its commercial bus fleet</strong> in under 6 years. The infrastructure gap is structural, not cyclical.</p>
-      </div>
-    </div>
-
-    <!-- Timeline -->
-    <div class="fade-up">
-      <h3 class="font-syne font-semibold text-xl text-tx-primary mb-8 text-center">Regulatory Milestones</h3>
-      <div class="relative timeline-line grid grid-cols-2 md:grid-cols-4 gap-6">
-        <div class="relative pt-10 text-center">
-          <div class="absolute top-3 left-1/2 -translate-x-1/2 w-5 h-5 rounded-full bg-brand-green border-2 border-white shadow z-10" aria-hidden="true"></div>
-          <div class="font-syne font-bold text-2xl text-brand-green">2026</div>
-          <div class="font-dm text-sm text-tx-mid mt-1">Series A close. First commercial EV hubs operational. LTA bus procurement cycle begins.</div>
-        </div>
-        <div class="relative pt-10 text-center">
-          <div class="absolute top-3 left-1/2 -translate-x-1/2 w-5 h-5 rounded-full bg-brand-green border-2 border-white shadow z-10" aria-hidden="true"></div>
-          <div class="font-syne font-bold text-2xl text-brand-green">2030</div>
-          <div class="font-dm text-sm text-tx-mid mt-1">All new bus registrations must be electric (LTA mandate). 5,800 buses need replacing.</div>
-        </div>
-        <div class="relative pt-10 text-center">
-          <div class="absolute top-3 left-1/2 -translate-x-1/2 w-5 h-5 rounded-full border-2 border-brand-green bg-white shadow z-10" aria-hidden="true"></div>
-          <div class="font-syne font-bold text-2xl text-tx-mid">2035</div>
-          <div class="font-dm text-sm text-tx-mid mt-1">All new car registrations electric. Commercial LCV and taxi fleet transition accelerates.</div>
-        </div>
-        <div class="relative pt-10 text-center">
-          <div class="absolute top-3 left-1/2 -translate-x-1/2 w-5 h-5 rounded-full border-2 border-brand-green bg-white shadow z-10" aria-hidden="true"></div>
-          <div class="font-syne font-bold text-2xl text-tx-mid">2040</div>
-          <div class="font-dm text-sm text-tx-mid mt-1">Singapore's full EV transition. All internal combustion vehicles phased out under national policy.</div>
-        </div>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- ============================================================ 03 MARKET SIZE ============================================================ -->
-<section id="market" class="section-pad" style="background: #E8EDE8;" aria-labelledby="market-headline">
-  <div class="max-w-[1200px] mx-auto px-6">
-    <div class="max-w-2xl mb-16 fade-up">
-      <span class="font-dm font-medium text-xs uppercase tracking-[0.12em] text-tx-muted mb-3 block">03 / Market Size</span>
-      <h2 id="market-headline" class="font-syne font-bold text-5xl md:text-6xl text-tx-primary leading-tight mb-4">A $260B Market.<br>Singapore Is the Beachhead.</h2>
-      <p class="font-dm text-lg text-tx-mid leading-relaxed">Policy-mandated demand, not speculation. The market is defined by legislation, fleet size, and replacement cycles.</p>
-    </div>
-
-    <!-- Big stats -->
-    <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-12">
-      <div class="card p-8 fade-up d1">
-        <div class="font-syne font-bold text-5xl gold-val mb-2" data-count="260" data-prefix="$" data-suffix="B">$260B</div>
-        <div class="font-dm font-medium text-sm text-tx-primary mb-1">Global Commercial EV Market</div>
-        <div class="font-dm text-xs text-tx-muted">By 2026 · Source: BloombergNEF, 2024</div>
-      </div>
-      <div class="card p-8 fade-up d2">
-        <div class="font-syne font-bold text-5xl gold-val mb-2">$680M</div>
-        <div class="font-dm font-medium text-sm text-tx-primary mb-1">Singapore TAM</div>
-        <div class="font-dm text-xs text-tx-muted">Over 5 years · Vehicle sales + parts + charging · Internal projection</div>
-      </div>
-      <div class="card p-8 fade-up d3">
-        <div class="font-syne font-bold text-5xl gold-val mb-2">$30B</div>
-        <div class="font-dm font-medium text-sm text-tx-primary mb-1">SG EV Component Market</div>
-        <div class="font-dm text-xs text-tx-muted">Projected by 2035 · Internal projection</div>
-      </div>
-    </div>
-
-    <!-- Fleet gap + LCV demand -->
-    <div class="grid grid-cols-1 lg:grid-cols-2 gap-6 mb-12">
-      <div class="card p-8 fade-up d1">
-        <h3 class="font-syne font-semibold text-xl text-tx-primary mb-6">Singapore Fleet Gap</h3>
-        <div class="space-y-4">
-          <div>
-            <div class="flex justify-between items-center mb-2">
-              <span class="font-dm text-sm text-tx-mid">Buses — Electric Today</span>
-              <span class="font-dm font-medium text-sm text-tx-primary">240 / 5,800</span>
-            </div>
-            <div class="w-full h-2 bg-[#E8EDE8] rounded-full overflow-hidden">
-              <div class="h-full bg-brand-green rounded-full" style="width: 4.1%"></div>
-            </div>
-            <div class="font-dm text-xs text-tx-muted mt-1">4.1% electrified · Source: LTA, 2024</div>
+      <div style="margin-top: clamp(3rem, 7vw, 5.5rem);">
+        <article class="pillar">
+          <div class="pillar-media reveal">
+            <!-- PLACEHOLDER: swap for looping video or photo of vehicles -->
+            <div class="pillar-media-placeholder">Fleet video / image</div>
           </div>
           <div>
-            <div class="flex justify-between items-center mb-2">
-              <span class="font-dm text-sm text-tx-mid">Taxis — Electric Today</span>
-              <span class="font-dm font-medium text-sm text-tx-primary">2,500 / 60,000</span>
-            </div>
-            <div class="w-full h-2 bg-[#E8EDE8] rounded-full overflow-hidden">
-              <div class="h-full bg-brand-green rounded-full" style="width: 4.2%"></div>
-            </div>
-            <div class="font-dm text-xs text-tx-muted mt-1">4.2% electrified · Source: LTA, 2024</div>
+            <h3 class="reveal">Fleet electrification</h3>
+            <p class="reveal" style="--stagger: 1">We source, finance, and commission the right electric vehicles for your routes — from vans to full-size coaches — and manage every step of the changeover.</p>
+            <ul class="checklist">
+              <li class="reveal" style="--stagger: 2"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="M4 12.5 9.5 18 20 6.5"/></svg>Route-matched vehicle sourcing</li>
+              <li class="reveal" style="--stagger: 3"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="M4 12.5 9.5 18 20 6.5"/></svg>Financing and leasing structures</li>
+              <li class="reveal" style="--stagger: 4"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="M4 12.5 9.5 18 20 6.5"/></svg>LTA compliance and registration</li>
+              <li class="reveal" style="--stagger: 5"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="M4 12.5 9.5 18 20 6.5"/></svg>Driver transition training</li>
+            </ul>
           </div>
-        </div>
-      </div>
-      <div class="card p-8 fade-up d2">
-        <h3 class="font-syne font-semibold text-xl text-tx-primary mb-6">LCV Unit Demand Curve</h3>
-        <div class="flex items-end gap-4">
-          <div class="flex-1 text-center">
-            <div class="font-syne font-bold text-3xl text-tx-primary">1.14M</div>
-            <div class="font-dm text-xs text-tx-muted mt-1">Units Today</div>
-          </div>
-          <div class="flex-1 flex items-center justify-center pb-4" aria-hidden="true">
-            <svg width="80" height="24" viewBox="0 0 80 24" fill="none">
-              <path d="M0 12 Q40 4 70 12" stroke="#1A4D3A" stroke-width="1.5" fill="none"/>
-              <path d="M65 7l5 5-5 5" stroke="#1A4D3A" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
-            </svg>
-          </div>
-          <div class="flex-1 text-center">
-            <div class="font-syne font-bold text-3xl text-brand-green">16M+</div>
-            <div class="font-dm text-xs text-tx-muted mt-1">By 2035</div>
-          </div>
-        </div>
-        <div class="font-dm text-xs text-tx-muted mt-6 pt-4 border-t border-[#E2E4DF]">14x growth in LCV demand · Source: IEA Global EV Outlook, 2024</div>
-      </div>
-    </div>
+        </article>
 
-    <!-- Regional expansion -->
-    <div class="card p-8 fade-up">
-      <h3 class="font-syne font-semibold text-xl text-tx-primary mb-6">Regional Expansion Upside</h3>
-      <div class="grid grid-cols-2 md:grid-cols-4 gap-4">
-        <div class="text-center p-4 rounded-lg" style="background: #F0F4F0;">
-          <div class="font-syne font-bold text-lg text-brand-green mb-1">Malaysia</div>
-          <div class="font-dm text-xs text-tx-muted">Active EV subsidy programme. Commercial fleet electrification underway.</div>
-        </div>
-        <div class="text-center p-4 rounded-lg" style="background: #F0F4F0;">
-          <div class="font-syne font-bold text-lg text-brand-green mb-1">Thailand</div>
-          <div class="font-dm text-xs text-tx-muted">Pilot already delivered. First integrated EV solution operational.</div>
-        </div>
-        <div class="text-center p-4 rounded-lg" style="background: #F0F4F0;">
-          <div class="font-syne font-bold text-lg text-brand-green mb-1">Indonesia</div>
-          <div class="font-dm text-xs text-tx-muted">Largest ASEAN fleet market. Government EV mandate in progress.</div>
-        </div>
-        <div class="text-center p-4 rounded-lg" style="background: #F0F4F0;">
-          <div class="font-syne font-bold text-lg text-brand-green mb-1">Philippines</div>
-          <div class="font-dm text-xs text-tx-muted">E-jeepney modernisation programme creates structured fleet demand.</div>
-        </div>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- ============================================================ 04 SOLUTION ============================================================ -->
-<section id="solution" class="section-pad" style="background: #F7F6F2;" aria-labelledby="solution-headline">
-  <div class="max-w-[1200px] mx-auto px-6">
-    <div class="max-w-2xl mb-16 fade-up">
-      <span class="font-dm font-medium text-xs uppercase tracking-[0.12em] text-tx-muted mb-3 block">04 / Our Solution</span>
-      <h2 id="solution-headline" class="font-syne font-bold text-5xl md:text-6xl text-tx-primary leading-tight mb-4">One Integrated Platform.<br>Three Revenue Pillars.</h2>
-      <p class="font-dm text-lg text-tx-mid leading-relaxed">Each pillar reinforces the others. More vehicles sold means more charging demand. More charging demand means more parts consumption. The flywheel compounds.</p>
-    </div>
-
-    <!-- Flywheel diagram — orbital ring with animated traveling dot -->
-    <div class="relative mb-16 fade-up mx-auto" style="max-width:680px;" aria-label="Flywheel: three interconnected pillars — Resell, Charge, Parts">
-
-      <!-- Desktop orbital ring -->
-      <div class="hidden md:block relative" style="height:520px;">
-
-        <svg class="absolute inset-0 w-full h-full pointer-events-none" viewBox="0 0 680 520" fill="none" aria-hidden="true">
-          <defs>
-            <filter id="fw-glow-dot" x="-100%" y="-100%" width="300%" height="300%">
-              <feGaussianBlur stdDeviation="4" result="blur"/>
-              <feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge>
-            </filter>
-            <filter id="fw-glow-center" x="-50%" y="-50%" width="200%" height="200%">
-              <feGaussianBlur stdDeviation="10" result="blur"/>
-              <feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge>
-            </filter>
-            <!-- Orbital path: center (340,270), r=130 -->
-            <path id="fw-orbit" d="M 340 140 A 130 130 0 0 1 340 400 A 130 130 0 0 1 340 140" fill="none" stroke="none"/>
-          </defs>
-
-          <!-- Outer faint halo -->
-          <circle cx="340" cy="270" r="155" stroke="#1A4D3A" stroke-width="1" stroke-opacity="0.06" fill="none"/>
-
-          <!-- Main orbital ring — dashed -->
-          <circle cx="340" cy="270" r="130" stroke="#C8D5C8" stroke-width="1.5" fill="none" stroke-dasharray="5 7"/>
-
-          <!-- Short connector lines: node → card edge -->
-          <!-- RESELL: node (340,140) → card bottom ~(340,118) -->
-          <line x1="340" y1="133" x2="340" y2="118" stroke="#C8D5C8" stroke-width="1.5"/>
-          <!-- CHARGE: node (227,335) → card top-right corner ~(195,415) -->
-          <line x1="223" y1="341" x2="197" y2="415" stroke="#C8D5C8" stroke-width="1.5"/>
-          <!-- PARTS: node (453,335) → card top-left ~(485,415) -->
-          <line x1="457" y1="341" x2="483" y2="415" stroke="#C8D5C8" stroke-width="1.5"/>
-
-          <!-- Node dots (ring intersections) -->
-          <circle cx="340" cy="140" r="8" fill="#F7F6F2" stroke="#1A4D3A" stroke-width="2"/>
-          <circle cx="340" cy="140" r="3.5" fill="#1A4D3A"/>
-          <circle cx="227" cy="335" r="8" fill="#F7F6F2" stroke="#1A4D3A" stroke-width="2"/>
-          <circle cx="227" cy="335" r="3.5" fill="#1A4D3A"/>
-          <circle cx="453" cy="335" r="8" fill="#F7F6F2" stroke="#1A4D3A" stroke-width="2"/>
-          <circle cx="453" cy="335" r="3.5" fill="#1A4D3A"/>
-
-          <!-- Centre badge glow -->
-          <circle cx="340" cy="270" r="62" fill="#1A4D3A" filter="url(#fw-glow-center)" opacity="0.18"/>
-          <!-- Centre badge -->
-          <circle cx="340" cy="270" r="56" fill="#1A4D3A"/>
-
-          <!-- Animated traveling dot -->
-          <circle r="6" fill="#6BCF97" filter="url(#fw-glow-dot)">
-            <animateMotion dur="6s" repeatCount="indefinite" rotate="auto">
-              <mpath href="#fw-orbit"/>
-            </animateMotion>
-          </circle>
-        </svg>
-
-        <!-- Centre label (overlays SVG) -->
-        <div style="position:absolute; left:50%; top:270px; transform:translate(-50%,-50%); text-align:center; z-index:5; pointer-events:none;">
-          <div style="font-family:'Roboto',sans-serif; font-weight:700; font-size:8.5px; color:#fff; letter-spacing:0.09em; line-height:1.7;">AMAGI<br>CARRIAGE</div>
-        </div>
-
-        <!-- RESELL card — top centre -->
-        <div class="card card-accent text-center" style="position:absolute; width:190px; left:50%; top:0; transform:translateX(-50%); padding:18px 14px; z-index:4;">
-          <div class="font-syne font-extrabold text-xs tracking-[0.12em] text-brand-green mb-2">RESELL</div>
-          <div class="font-dm text-sm text-tx-mid leading-relaxed">BYD Buses &amp; Trucks<br>Wuling / Linxys Vans<br>e-Taxis</div>
-        </div>
-
-        <!-- CHARGE card — bottom left -->
-        <div class="card card-accent text-center" style="position:absolute; width:185px; left:0; bottom:0; padding:18px 14px; z-index:4;">
-          <div class="font-syne font-extrabold text-xs tracking-[0.12em] text-brand-green mb-2">CHARGE</div>
-          <div class="font-dm text-sm text-tx-mid leading-relaxed">Solar + Battery<br>Fast DC Chargers<br><span class="gold-val font-medium">S$0.25/kWh</span></div>
-        </div>
-
-        <!-- PARTS card — bottom right -->
-        <div class="card card-accent text-center" style="position:absolute; width:185px; right:0; bottom:0; padding:18px 14px; z-index:4;">
-          <div class="font-syne font-extrabold text-xs tracking-[0.12em] text-brand-green mb-2">PARTS</div>
-          <div class="font-dm text-sm text-tx-mid leading-relaxed">Inverters &amp; Motors<br>Sensors &amp; Batteries<br>B2B Wholesale</div>
-        </div>
-      </div>
-
-      <!-- Mobile: vertical stack -->
-      <div class="md:hidden space-y-3">
-        <div class="card card-accent p-5 text-center">
-          <div class="font-syne font-extrabold text-xs tracking-[0.12em] text-brand-green mb-1">RESELL</div>
-          <div class="font-dm text-sm text-tx-mid">BYD Buses &amp; Trucks · Wuling / Linxys Vans · e-Taxis</div>
-        </div>
-        <div class="flex justify-center" aria-hidden="true"><svg width="14" height="20" viewBox="0 0 14 20" fill="none"><path d="M7 0v16M1 11l6 7 6-7" stroke="#1A4D3A" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
-        <div class="card card-accent p-5 text-center">
-          <div class="font-syne font-extrabold text-xs tracking-[0.12em] text-brand-green mb-1">CHARGE</div>
-          <div class="font-dm text-sm text-tx-mid">Solar + Battery · Fast DC Chargers · <span class="gold-val">S$0.25/kWh</span></div>
-        </div>
-        <div class="flex justify-center" aria-hidden="true"><svg width="14" height="20" viewBox="0 0 14 20" fill="none"><path d="M7 0v16M1 11l6 7 6-7" stroke="#1A4D3A" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
-        <div class="card card-accent p-5 text-center">
-          <div class="font-syne font-extrabold text-xs tracking-[0.12em] text-brand-green mb-1">PARTS</div>
-          <div class="font-dm text-sm text-tx-mid">Inverters &amp; Motors · Sensors &amp; Batteries · B2B Wholesale</div>
-        </div>
-      </div>
-    </div>
-
-    <!-- Pillar cards -->
-    <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
-      <div class="card card-accent p-8 fade-up d1">
-        <div class="font-syne font-bold text-xs uppercase tracking-widest text-brand-green mb-4">Pillar 01 — Resell</div>
-        <h3 class="font-syne font-semibold text-2xl text-tx-primary mb-3">Fleet Vehicle Sales</h3>
-        <p class="font-dm text-sm text-tx-mid leading-relaxed mb-4">Authorised distributor of BYD commercial buses and trucks, Wuling and Linxys electric vans, and e-taxi models for Singapore's commercial operators.</p>
-        <ul class="space-y-2">
-          <li class="flex items-center gap-2 font-dm text-sm text-tx-mid">
-            <span class="w-1.5 h-1.5 rounded-full bg-brand-green flex-shrink-0" aria-hidden="true"></span>BYD buses: S$250K–S$400K/unit
-          </li>
-          <li class="flex items-center gap-2 font-dm text-sm text-tx-mid">
-            <span class="w-1.5 h-1.5 rounded-full bg-brand-green flex-shrink-0" aria-hidden="true"></span>e-Taxis: S$10K–S$15K/unit
-          </li>
-          <li class="flex items-center gap-2 font-dm text-sm text-tx-mid">
-            <span class="w-1.5 h-1.5 rounded-full bg-brand-green flex-shrink-0" aria-hidden="true"></span>LTA-compliant import certification
-          </li>
-        </ul>
-      </div>
-      <div class="card card-accent p-8 fade-up d2">
-        <div class="font-syne font-bold text-xs uppercase tracking-widest text-brand-green mb-4">Pillar 02 — Charge</div>
-        <h3 class="font-syne font-semibold text-2xl text-tx-primary mb-3">Solar Charging Hubs</h3>
-        <p class="font-dm text-sm text-tx-mid leading-relaxed mb-4">Integrated solar panels, battery storage, and fast DC charging infrastructure at commercial depots. Operators pay per use or via monthly fleet subscription.</p>
-        <ul class="space-y-2">
-          <li class="flex items-center gap-2 font-dm text-sm text-tx-mid">
-            <span class="w-1.5 h-1.5 rounded-full bg-brand-green flex-shrink-0" aria-hidden="true"></span>
-            <span><span class="gold-val font-medium">S$0.25/kWh</span> vs grid S$0.35/kWh</span>
-          </li>
-          <li class="flex items-center gap-2 font-dm text-sm text-tx-mid">
-            <span class="w-1.5 h-1.5 rounded-full bg-brand-green flex-shrink-0" aria-hidden="true"></span>35% lower cost vs grid-only
-          </li>
-          <li class="flex items-center gap-2 font-dm text-sm text-tx-mid">
-            <span class="w-1.5 h-1.5 rounded-full bg-brand-green flex-shrink-0" aria-hidden="true"></span>Recurring subscription revenue
-          </li>
-        </ul>
-      </div>
-      <div class="card card-accent p-8 fade-up d3">
-        <div class="font-syne font-bold text-xs uppercase tracking-widest text-brand-green mb-4">Pillar 03 — Parts</div>
-        <h3 class="font-syne font-semibold text-2xl text-tx-primary mb-3">EV Components</h3>
-        <p class="font-dm text-sm text-tx-mid leading-relaxed mb-4">B2B wholesale supply of EV-specific components to operators, workshops, and infrastructure builders across Singapore and the region.</p>
-        <ul class="space-y-2">
-          <li class="flex items-center gap-2 font-dm text-sm text-tx-mid">
-            <span class="w-1.5 h-1.5 rounded-full bg-brand-green flex-shrink-0" aria-hidden="true"></span>Inverters and charging interfaces
-          </li>
-          <li class="flex items-center gap-2 font-dm text-sm text-tx-mid">
-            <span class="w-1.5 h-1.5 rounded-full bg-brand-green flex-shrink-0" aria-hidden="true"></span>EV sensors, batteries, motors
-          </li>
-          <li class="flex items-center gap-2 font-dm text-sm text-tx-mid">
-            <span class="w-1.5 h-1.5 rounded-full bg-brand-green flex-shrink-0" aria-hidden="true"></span>Predictable recurring demand
-          </li>
-        </ul>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- ============================================================ 05 BUSINESS MODEL ============================================================ -->
-<section id="financials" class="section-pad" style="background: #E8EDE8;" aria-labelledby="biz-headline">
-  <div class="max-w-[1200px] mx-auto px-6">
-    <div class="max-w-2xl mb-16 fade-up">
-      <span class="font-dm font-medium text-xs uppercase tracking-[0.12em] text-tx-muted mb-3 block">05 / Business Model</span>
-      <h2 id="biz-headline" class="font-syne font-bold text-5xl md:text-6xl text-tx-primary leading-tight mb-4">Four Revenue Streams.<br>One Reinforcing Model.</h2>
-    </div>
-
-    <!-- Margin callout -->
-    <div class="gold-bg border border-[#B08D3C]/20 rounded-2xl p-6 md:p-8 mb-10 fade-up flex flex-col md:flex-row items-center gap-6">
-      <div>
-        <div class="font-dm font-medium text-xs uppercase tracking-widest text-tx-muted mb-2">Blended Gross Margin Target</div>
-        <div class="font-syne font-bold text-7xl gold-val">25–30%</div>
-      </div>
-      <div class="hidden md:block w-px h-20 bg-[#B08D3C]/20"></div>
-      <div class="flex-1">
-        <p class="font-dm text-base text-tx-mid leading-relaxed">Recurring revenue from charging subscriptions creates long-term lock-in and margin predictability. Vehicle resale anchors the relationship. Parts and charging compound it.</p>
-        <div class="font-dm text-xs text-tx-muted mt-3">All margin figures are targets, not guarantees. Refer to data room for detailed projections.</div>
-      </div>
-    </div>
-
-    <!-- Revenue streams — drag-scrollable cards -->
-    <div class="fade-up">
-      <div class="drag-hint" aria-hidden="true">
-        <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M2 8h12M9 4l4 4-4 4" stroke="#9CA3AF" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/></svg>
-        Drag to explore all four streams
-      </div>
-      <div class="drag-scroll gap-5" id="biz-scroll" role="list" aria-label="Revenue streams — drag to scroll">
-
-        <!-- Card 1: Vehicle Resale -->
-        <div class="card card-accent" style="width:290px; padding:28px 24px;" role="listitem">
-          <div class="font-dm font-medium text-xs uppercase tracking-widest text-tx-muted mb-1">01</div>
-          <div class="font-syne font-semibold text-lg text-tx-primary mb-1">Vehicle Resale</div>
-          <div class="font-dm text-xs text-tx-muted mb-5">BYD buses, trucks, e-taxis</div>
-          <div class="gold-bg rounded-xl p-4 mb-5">
-            <div class="font-syne font-bold text-2xl gold-val">S$70K–S$400K</div>
-            <div class="font-dm text-xs text-tx-muted mt-0.5">per bus · <span class="gold-val">S$10–15K</span> per e-taxi</div>
-          </div>
-          <div class="font-dm text-sm text-tx-mid leading-relaxed mb-4">Direct fleet sales to commercial operators.</div>
-          <span class="font-dm text-xs font-medium px-2.5 py-1 rounded-full bg-[#F0F4F0] text-brand-green">Project-based</span>
-        </div>
-
-        <!-- Card 2: Charging Services -->
-        <div class="card card-accent" style="width:290px; padding:28px 24px;" role="listitem">
-          <div class="font-dm font-medium text-xs uppercase tracking-widest text-tx-muted mb-1">02</div>
-          <div class="font-syne font-semibold text-lg text-tx-primary mb-1">Charging Services</div>
-          <div class="font-dm text-xs text-tx-muted mb-5">Charge &amp; Save programme</div>
-          <div class="gold-bg rounded-xl p-4 mb-5">
-            <div class="font-syne font-bold text-2xl gold-val">S$0.25/kWh</div>
-            <div class="font-dm text-xs text-tx-muted mt-0.5">vs grid <span class="gold-val">S$0.35/kWh</span> — 29% cheaper</div>
-          </div>
-          <div class="font-dm text-sm text-tx-mid leading-relaxed mb-4">Pay-per-use + monthly fleet subscription.</div>
-          <span class="font-dm text-xs font-medium px-2.5 py-1 rounded-full bg-green-50 text-brand-green border border-brand-green/20">Recurring</span>
-        </div>
-
-        <!-- Card 3: Parts & Components -->
-        <div class="card card-accent" style="width:290px; padding:28px 24px;" role="listitem">
-          <div class="font-dm font-medium text-xs uppercase tracking-widest text-tx-muted mb-1">03</div>
-          <div class="font-syne font-semibold text-lg text-tx-primary mb-1">Parts &amp; Components</div>
-          <div class="font-dm text-xs text-tx-muted mb-5">EV sensors, batteries, inverters</div>
-          <div class="gold-bg rounded-xl p-4 mb-5">
-            <div class="font-syne font-bold text-2xl gold-val">B2B Wholesale</div>
-            <div class="font-dm text-xs text-tx-muted mt-0.5">Structured margin on every component</div>
-          </div>
-          <div class="font-dm text-sm text-tx-mid leading-relaxed mb-4">Wholesale to operators and workshops regionally.</div>
-          <span class="font-dm text-xs font-medium px-2.5 py-1 rounded-full bg-green-50 text-brand-green border border-brand-green/20">Recurring</span>
-        </div>
-
-        <!-- Card 4: Solar Installation -->
-        <div class="card card-accent" style="width:290px; padding:28px 24px;" role="listitem">
-          <div class="font-dm font-medium text-xs uppercase tracking-widest text-tx-muted mb-1">04</div>
-          <div class="font-syne font-semibold text-lg text-tx-primary mb-1">Solar Installation</div>
-          <div class="font-dm text-xs text-tx-muted mb-5">Depot-scale solar + storage</div>
-          <div class="gold-bg rounded-xl p-4 mb-5">
-            <div class="font-syne font-bold text-2xl gold-val">Project-based</div>
-            <div class="font-dm text-xs text-tx-muted mt-0.5">Design, supply, and install contracts</div>
-          </div>
-          <div class="font-dm text-sm text-tx-mid leading-relaxed mb-4">Feeds recurring kWh revenue from each hub built.</div>
-          <span class="font-dm text-xs font-medium px-2.5 py-1 rounded-full bg-[#F0F4F0] text-brand-green">Project-based</span>
-        </div>
-
-        <!-- Spacer so last card has breathing room -->
-        <div style="width:1px; flex-shrink:0;" aria-hidden="true"></div>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- ============================================================ 06 COMPETITIVE EDGE ============================================================ -->
-<section id="edge" class="section-pad" style="background: #F7F6F2;" aria-labelledby="edge-headline">
-  <div class="max-w-[1200px] mx-auto px-6">
-    <div class="max-w-2xl mb-16 fade-up">
-      <span class="font-dm font-medium text-xs uppercase tracking-[0.12em] text-tx-muted mb-3 block">06 / Competitive Edge</span>
-      <h2 id="edge-headline" class="font-syne font-bold text-5xl md:text-6xl text-tx-primary leading-tight mb-4">12 Years of Operator Trust.<br>First Mover in Integrated Commercial EV.</h2>
-    </div>
-
-    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mb-16">
-      <div class="card card-accent p-7 fade-up d1">
-        <div class="w-10 h-10 rounded-lg bg-[#F0F4F0] flex items-center justify-center mb-4" aria-hidden="true">
-          <svg width="20" height="20" viewBox="0 0 20 20" fill="none"><path d="M10 2l2.4 4.8 5.3.8-3.85 3.75.91 5.3L10 14.2l-4.76 2.45.91-5.3L2.3 7.6l5.3-.8L10 2z" fill="#1A4D3A"/></svg>
-        </div>
-        <h3 class="font-syne font-semibold text-lg text-tx-primary mb-2">12 Years Operator Relationships</h3>
-        <p class="font-dm text-sm text-tx-mid leading-relaxed">Established relationships with LTA, SMRT, Comfort Delgro, and bus depot operators built over a decade of commercial transport work.</p>
-      </div>
-      <div class="card card-accent p-7 fade-up d2">
-        <div class="w-10 h-10 rounded-lg bg-[#F0F4F0] flex items-center justify-center mb-4" aria-hidden="true">
-          <svg width="20" height="20" viewBox="0 0 20 20" fill="none"><circle cx="10" cy="10" r="8" stroke="#1A4D3A" stroke-width="1.5"/><path d="M6 10l3 3 5-5" stroke="#1A4D3A" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
-        </div>
-        <h3 class="font-syne font-semibold text-lg text-tx-primary mb-2">First Mover — Integrated Hub</h3>
-        <p class="font-dm text-sm text-tx-mid leading-relaxed">No competitor offers a combined resell + charge + parts model for commercial fleets in Singapore. Competitors operate in single verticals only.</p>
-      </div>
-      <div class="card card-accent p-7 fade-up d3">
-        <div class="w-10 h-10 rounded-lg bg-[#F0F4F0] flex items-center justify-center mb-4" aria-hidden="true">
-          <svg width="20" height="20" viewBox="0 0 20 20" fill="none"><rect x="3" y="3" width="14" height="14" rx="2" stroke="#1A4D3A" stroke-width="1.5"/><path d="M7 10h6M10 7v6" stroke="#1A4D3A" stroke-width="1.5" stroke-linecap="round"/></svg>
-        </div>
-        <h3 class="font-syne font-semibold text-lg text-tx-primary mb-2">Licenced &amp; Compliant</h3>
-        <p class="font-dm text-sm text-tx-mid leading-relaxed">Fully licenced and compliant with Singapore's strict EV vehicle import, charging infrastructure, and operator certification regulations.</p>
-      </div>
-      <div class="card card-accent p-7 fade-up d4">
-        <div class="w-10 h-10 rounded-lg bg-[#F0F4F0] flex items-center justify-center mb-4" aria-hidden="true">
-          <svg width="20" height="20" viewBox="0 0 20 20" fill="none"><path d="M10 3v14M3 10h14" stroke="#1A4D3A" stroke-width="1.5" stroke-linecap="round"/><circle cx="10" cy="10" r="7" stroke="#1A4D3A" stroke-width="1.5"/></svg>
-        </div>
-        <h3 class="font-syne font-semibold text-lg text-tx-primary mb-2">35% Cost Moat — Solar</h3>
-        <p class="font-dm text-sm text-tx-mid leading-relaxed">Solar + battery storage integration cuts charging costs 35% versus grid-only solutions. Operators who choose us lock in a structural cost advantage.</p>
-      </div>
-      <div class="card card-accent p-7 fade-up d5 md:col-span-2 lg:col-span-1">
-        <div class="w-10 h-10 rounded-lg bg-[#F0F4F0] flex items-center justify-center mb-4" aria-hidden="true">
-          <svg width="20" height="20" viewBox="0 0 20 20" fill="none"><path d="M3 13l4-4 4 4 6-8" stroke="#1A4D3A" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
-        </div>
-        <h3 class="font-syne font-semibold text-lg text-tx-primary mb-2">Thailand Pilot — Proven</h3>
-        <p class="font-dm text-sm text-tx-mid leading-relaxed">First integrated commercial EV solution delivered internationally. The Thailand pilot validates our cross-border operational model ahead of regional expansion.</p>
-      </div>
-    </div>
-
-    <!-- Trust bar -->
-    <div class="fade-up text-center">
-      <div class="font-dm text-xs uppercase tracking-widest text-tx-muted mb-6">Existing Operator Relationships</div>
-      <div class="flex items-center justify-center flex-wrap gap-12">
-        <span class="trust-logo">SMRT</span>
-        <span class="trust-logo">Comfort Delgro</span>
-        <span class="trust-logo">LTA</span>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- ============================================================ 07 INVESTMENT TERMS ============================================================ -->
-<section id="terms" class="section-pad" style="background: #F0F4F0;" aria-labelledby="terms-headline">
-  <div class="max-w-[1200px] mx-auto px-6">
-    <div class="max-w-2xl mb-12 fade-up">
-      <span class="font-dm font-medium text-xs uppercase tracking-[0.12em] text-tx-muted mb-3 block">07 / Investment Terms</span>
-      <h2 id="terms-headline" class="font-syne font-bold text-5xl md:text-6xl text-tx-primary leading-tight">The Deal Structure.</h2>
-    </div>
-
-    <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-8">
-      <div class="card p-8 fade-up d1">
-        <div class="space-y-6">
-          <div class="pb-6 border-b border-[#E2E4DF]">
-            <div class="font-dm font-medium text-xs uppercase tracking-widest text-tx-muted mb-1">Instrument</div>
-            <div class="font-syne font-semibold text-xl text-tx-primary">Convertible Bond</div>
-            <div class="font-dm text-sm text-tx-mid mt-1">Not equity at this stage. Senior debt preference.</div>
-          </div>
-          <div class="pb-6 border-b border-[#E2E4DF]">
-            <div class="font-dm font-medium text-xs uppercase tracking-widest text-tx-muted mb-1">Conversion Discount</div>
-            <div class="font-syne font-bold text-3xl gold-val">25%</div>
-            <div class="font-dm text-sm text-tx-mid mt-1">On next equity round price</div>
+        <article class="pillar">
+          <div class="pillar-media reveal">
+            <!-- PLACEHOLDER: swap for depot charging footage -->
+            <div class="pillar-media-placeholder">Charging video / image</div>
           </div>
           <div>
-            <div class="font-dm font-medium text-xs uppercase tracking-widest text-tx-muted mb-1">Valuation Cap</div>
-            <div class="font-syne font-semibold text-xl text-tx-primary">To be confirmed</div>
-            <div class="font-dm text-sm text-tx-mid mt-1">Contact us for current cap terms</div>
+            <h3 class="reveal">Charging infrastructure</h3>
+            <p class="reveal" style="--stagger: 1">Depot charging designed around your schedules and your grid connection — built, energised, and monitored so your fleet is always ready at first light.</p>
+            <ul class="checklist">
+              <li class="reveal" style="--stagger: 2"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="M4 12.5 9.5 18 20 6.5"/></svg>Depot design and build</li>
+              <li class="reveal" style="--stagger: 3"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="M4 12.5 9.5 18 20 6.5"/></svg>Smart load management</li>
+              <li class="reveal" style="--stagger: 4"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="M4 12.5 9.5 18 20 6.5"/></svg>Preventive maintenance</li>
+              <li class="reveal" style="--stagger: 5"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="M4 12.5 9.5 18 20 6.5"/></svg>24/7 network monitoring</li>
+            </ul>
           </div>
-        </div>
-      </div>
-      <div class="card p-8 fade-up d2">
-        <div class="space-y-6">
-          <div class="pb-6 border-b border-[#E2E4DF]">
-            <div class="font-dm font-medium text-xs uppercase tracking-widest text-tx-muted mb-1">Yield</div>
-            <div class="font-syne font-semibold text-xl text-tx-primary">Competitive Interest</div>
-            <div class="font-dm text-sm text-tx-mid mt-1">Accruing from Day 1. Rate confirmed in data room.</div>
-          </div>
-          <div class="pb-6 border-b border-[#E2E4DF]">
-            <div class="font-dm font-medium text-xs uppercase tracking-widest text-tx-muted mb-1">Seniority</div>
-            <div class="font-syne font-semibold text-xl text-tx-primary">Senior Debt Preference</div>
-            <div class="font-dm text-sm text-tx-mid mt-1">Investor principal protected while growth is pursued</div>
+        </article>
+
+        <article class="pillar">
+          <div class="pillar-media reveal">
+            <!-- PLACEHOLDER: swap for telematics dashboard footage -->
+            <div class="pillar-media-placeholder">Intelligence video / image</div>
           </div>
           <div>
-            <div class="font-dm font-medium text-xs uppercase tracking-widest text-tx-muted mb-1">Closing Date</div>
-            <div class="font-syne font-bold text-3xl gold-val">June 30, 2026</div>
-            <div class="font-dm text-sm text-tx-mid mt-1">Hard deadline. Raise will not extend.</div>
+            <h3 class="reveal">Fleet intelligence</h3>
+            <p class="reveal" style="--stagger: 1">Live telematics across every vehicle and charger, turned into decisions — where to route, when to charge, and what your board needs to report.</p>
+            <ul class="checklist">
+              <li class="reveal" style="--stagger: 2"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="M4 12.5 9.5 18 20 6.5"/></svg>Real-time fleet telematics</li>
+              <li class="reveal" style="--stagger: 3"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="M4 12.5 9.5 18 20 6.5"/></svg>Route and energy optimisation</li>
+              <li class="reveal" style="--stagger: 4"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="M4 12.5 9.5 18 20 6.5"/></svg>Battery health analytics</li>
+              <li class="reveal" style="--stagger: 5"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="M4 12.5 9.5 18 20 6.5"/></svg>Carbon reporting dashboards</li>
+            </ul>
           </div>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ 4. VALUES / APPROACH ============ -->
+  <section class="section" id="approach">
+    <div class="container">
+      <p class="eyebrow reveal">How we work</p>
+      <h2 class="display-2 reveal" style="--stagger: 1">Built like infrastructure,<br>run like hospitality</h2>
+    </div>
+    <div class="values-track" role="list">
+      <div class="value-card reveal" role="listitem">
+        <div class="value-photo"></div><!-- PLACEHOLDER: photo -->
+        <div class="value-caption">
+          <strong>Uptime, above all</strong>
+          <span>Spares, service crews, and swap vehicles on standby — your schedule never waits on us.</span>
+        </div>
+      </div>
+      <div class="value-card reveal" role="listitem" style="--stagger: 1">
+        <div class="value-photo"></div><!-- PLACEHOLDER: photo -->
+        <div class="value-caption">
+          <strong>Built for the long haul</strong>
+          <span>Ten-year asset plans, not twelve-month pilots.</span>
+        </div>
+      </div>
+      <div class="value-card reveal" role="listitem" style="--stagger: 2">
+        <div class="value-photo"></div><!-- PLACEHOLDER: photo -->
+        <div class="value-caption">
+          <strong>One accountable partner</strong>
+          <span>Vehicles, chargers, and software under a single contract and a single phone number.</span>
+        </div>
+      </div>
+      <div class="value-card reveal" role="listitem" style="--stagger: 3">
+        <div class="value-photo"></div><!-- PLACEHOLDER: photo -->
+        <div class="value-caption">
+          <strong>Measured in tonnes saved</strong>
+          <span>Every engagement reports verified emissions avoided, not estimates.</span>
         </div>
       </div>
     </div>
+  </section>
 
-    <div class="fade-up rounded-xl border border-[#E2E4DF] bg-white px-6 py-4">
-      <p class="font-dm text-sm text-tx-muted leading-relaxed">Investment terms are indicative only. Full terms are available in the data room. This page does not constitute an offer to sell or a solicitation of any investment. Legal review of all terms is pending — do not rely on any figures above as final. Consult qualified legal and financial advisers before investing.</p>
+  <!-- ============ 5. LOGO MARQUEE ============ -->
+  <section class="section" id="partners">
+    <div class="container" style="text-align: center; margin-bottom: 2.5rem;">
+      <p class="eyebrow reveal">Trusted by operators across Singapore</p>
     </div>
-  </div>
-</section>
-
-<!-- ============================================================ 08 USE OF FUNDS ============================================================ -->
-<section id="funds" class="section-pad" style="background: #F7F6F2;" aria-labelledby="funds-headline">
-  <div class="max-w-[1200px] mx-auto px-6">
-    <div class="max-w-2xl mb-16 fade-up">
-      <span class="font-dm font-medium text-xs uppercase tracking-[0.12em] text-tx-muted mb-3 block">08 / Use of Funds</span>
-      <h2 id="funds-headline" class="font-syne font-bold text-5xl md:text-6xl text-tx-primary leading-tight mb-4">SGD <span class="gold-val">$9.9M.</span><br>Here's Exactly Where It Goes.</h2>
-    </div>
-
-    <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
-      <!-- Donut chart -->
-      <div class="flex justify-center fade-up" aria-label="Funds allocation donut chart">
-        <div class="relative w-64 h-64">
-          <svg viewBox="0 0 200 200" class="w-full h-full -rotate-90" role="img" aria-label="Allocation chart">
-            <!-- Segments: total circumference for r=80 is 502.65 -->
-            <!-- Inventory 40.4% = 203.1 -->
-            <circle cx="100" cy="100" r="80" fill="none" stroke="#1A4D3A" stroke-width="28" stroke-dasharray="203.1 299.55" stroke-dashoffset="0"/>
-            <!-- Parts Warehouse 12.1% = 60.8 -->
-            <circle cx="100" cy="100" r="80" fill="none" stroke="#2D6A4F" stroke-width="28" stroke-dasharray="60.8 441.85" stroke-dashoffset="-203.1"/>
-            <!-- Solar Hubs 30.3% = 152.3 -->
-            <circle cx="100" cy="100" r="80" fill="none" stroke="#6BCF97" stroke-width="28" stroke-dasharray="152.3 350.35" stroke-dashoffset="-263.9"/>
-            <!-- AI Platform 10.1% = 50.8 -->
-            <circle cx="100" cy="100" r="80" fill="none" stroke="#B08D3C" stroke-width="28" stroke-dasharray="50.8 451.85" stroke-dashoffset="-416.2"/>
-            <!-- Team 7.1% = 35.7 -->
-            <circle cx="100" cy="100" r="80" fill="none" stroke="#E8EDE8" stroke-width="28" stroke-dasharray="35.7 466.95" stroke-dashoffset="-467.0"/>
-          </svg>
-          <div class="absolute inset-0 flex flex-col items-center justify-center">
-            <div class="font-syne font-bold text-2xl gold-val">$9.9M</div>
-            <div class="font-dm text-xs text-tx-muted">SGD Total Raise</div>
-          </div>
+    <div class="marquee" aria-label="Client logos">
+      <div class="marquee-track">
+        <!-- PLACEHOLDER: replace wordmarks with real grayscale client logos. Strip is duplicated for the seamless loop. -->
+        <div class="marquee-logo" aria-hidden="false">
+          <span>Meridian Logistics</span><span>Harbourline</span><span>Straits Freight</span><span>Velocity Coach</span><span>Nanyang Transit</span><span>Portside Express</span>
         </div>
-      </div>
-
-      <!-- Line items -->
-      <div class="space-y-5 fade-up">
-        <div class="flex items-start gap-4">
-          <div class="w-3 h-3 rounded-sm mt-1.5 flex-shrink-0" style="background: #1A4D3A;" aria-hidden="true"></div>
-          <div class="flex-1">
-            <div class="flex justify-between items-baseline mb-1">
-              <div class="font-syne font-semibold text-sm text-tx-primary">Fleet Inventory</div>
-              <div class="font-syne font-bold text-sm gold-val">$4M</div>
-            </div>
-            <div class="w-full h-1.5 bg-[#E2E4DF] rounded-full mb-2"><div class="h-full rounded-full" style="width:40.4%; background:#1A4D3A;"></div></div>
-            <div class="font-dm text-xs text-tx-muted">Initial stock of BYD buses, vans, and e-taxis ready for operator delivery on close.</div>
-          </div>
-        </div>
-        <div class="flex items-start gap-4">
-          <div class="w-3 h-3 rounded-sm mt-1.5 flex-shrink-0" style="background: #2D6A4F;" aria-hidden="true"></div>
-          <div class="flex-1">
-            <div class="flex justify-between items-baseline mb-1">
-              <div class="font-syne font-semibold text-sm text-tx-primary">Parts Warehouse</div>
-              <div class="font-syne font-bold text-sm gold-val">$1.2M</div>
-            </div>
-            <div class="w-full h-1.5 bg-[#E2E4DF] rounded-full mb-2"><div class="h-full rounded-full" style="width:12.1%; background:#2D6A4F;"></div></div>
-            <div class="font-dm text-xs text-tx-muted">Stocked components hub enabling next-day B2B supply to operators and workshops.</div>
-          </div>
-        </div>
-        <div class="flex items-start gap-4">
-          <div class="w-3 h-3 rounded-sm mt-1.5 flex-shrink-0" style="background: #6BCF97;" aria-hidden="true"></div>
-          <div class="flex-1">
-            <div class="flex justify-between items-baseline mb-1">
-              <div class="font-syne font-semibold text-sm text-tx-primary">3 Solar Charging Hubs</div>
-              <div class="font-syne font-bold text-sm gold-val">$3M</div>
-            </div>
-            <div class="w-full h-1.5 bg-[#E2E4DF] rounded-full mb-2"><div class="h-full rounded-full" style="width:30.3%; background:#6BCF97;"></div></div>
-            <div class="font-dm text-xs text-tx-muted">Three fully operational solar-integrated DC fast-charging depots, activating recurring kWh revenue.</div>
-          </div>
-        </div>
-        <div class="flex items-start gap-4">
-          <div class="w-3 h-3 rounded-sm mt-1.5 flex-shrink-0" style="background: #B08D3C;" aria-hidden="true"></div>
-          <div class="flex-1">
-            <div class="flex justify-between items-baseline mb-1">
-              <div class="font-syne font-semibold text-sm text-tx-primary">AI Fleet Platform</div>
-              <div class="font-syne font-bold text-sm gold-val">$1M</div>
-            </div>
-            <div class="w-full h-1.5 bg-[#E2E4DF] rounded-full mb-2"><div class="h-full rounded-full" style="width:10.1%; background:#B08D3C;"></div></div>
-            <div class="font-dm text-xs text-tx-muted">Fleet monitoring, charging scheduling, and predictive maintenance SaaS for operator clients.</div>
-          </div>
-        </div>
-        <div class="flex items-start gap-4">
-          <div class="w-3 h-3 rounded-sm mt-1.5 flex-shrink-0" style="background: #E8EDE8; border: 1px solid #E2E4DF;" aria-hidden="true"></div>
-          <div class="flex-1">
-            <div class="flex justify-between items-baseline mb-1">
-              <div class="font-syne font-semibold text-sm text-tx-primary">Team &amp; Operations</div>
-              <div class="font-syne font-bold text-sm gold-val">$0.7M</div>
-            </div>
-            <div class="w-full h-1.5 bg-[#E2E4DF] rounded-full mb-2"><div class="h-full rounded-full" style="width:7.1%; background:#9CA3AF;"></div></div>
-            <div class="font-dm text-xs text-tx-muted">Key hires in operations, technical, and business development to support the growth plan.</div>
-          </div>
+        <div class="marquee-logo" aria-hidden="true">
+          <span>Meridian Logistics</span><span>Harbourline</span><span>Straits Freight</span><span>Velocity Coach</span><span>Nanyang Transit</span><span>Portside Express</span>
         </div>
       </div>
     </div>
-  </div>
-</section>
+  </section>
 
-<!-- ============================================================ 09 GROWTH ROADMAP ============================================================ -->
-<section id="roadmap" class="section-pad" style="background: #E8EDE8;" aria-labelledby="roadmap-headline">
-  <div class="max-w-[1200px] mx-auto px-6">
-    <div class="max-w-2xl mb-16 fade-up">
-      <span class="font-dm font-medium text-xs uppercase tracking-[0.12em] text-tx-muted mb-3 block">09 / Growth Roadmap</span>
-      <h2 id="roadmap-headline" class="font-syne font-bold text-5xl md:text-6xl text-tx-primary leading-tight mb-4">Three Phases.<br>One Trajectory.</h2>
-      <p class="font-dm text-lg text-tx-mid leading-relaxed">Each phase is anchored to the use of funds. Capital is deployed purposefully — not held.</p>
-    </div>
-
-    <div class="fade-up mb-2">
-      <div class="drag-hint" aria-hidden="true">
-        <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M2 8h12M9 4l4 4-4 4" stroke="#9CA3AF" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/></svg>
-        Drag to explore each phase
-      </div>
-    </div>
-    <div class="drag-scroll gap-5 mb-12" id="roadmap-scroll" role="list" aria-label="Growth roadmap phases — drag to scroll">
-      <div class="card card-accent p-8 fade-up d1" style="width:340px;" role="listitem">
-        <div class="font-syne font-bold text-4xl text-brand-green mb-1">2026</div>
-        <div class="font-dm font-medium text-xs uppercase tracking-widest text-tx-muted mb-4">Phase 1 — Foundation</div>
-        <ul class="space-y-3">
-          <li class="flex items-start gap-2 font-dm text-sm text-tx-mid">
-            <svg class="w-4 h-4 mt-0.5 flex-shrink-0 text-brand-green" fill="none" viewBox="0 0 16 16" aria-hidden="true"><path d="M3 8l3 3 7-7" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
-            Series A close — SGD $9.9M secured
-          </li>
-          <li class="flex items-start gap-2 font-dm text-sm text-tx-mid">
-            <svg class="w-4 h-4 mt-0.5 flex-shrink-0 text-brand-green" fill="none" viewBox="0 0 16 16" aria-hidden="true"><path d="M3 8l3 3 7-7" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
-            First 3 solar charging hubs operational
-          </li>
-          <li class="flex items-start gap-2 font-dm text-sm text-tx-mid">
-            <svg class="w-4 h-4 mt-0.5 flex-shrink-0 text-brand-green" fill="none" viewBox="0 0 16 16" aria-hidden="true"><path d="M3 8l3 3 7-7" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
-            Initial fleet inventory deployed
-          </li>
-          <li class="flex items-start gap-2 font-dm text-sm text-tx-mid">
-            <svg class="w-4 h-4 mt-0.5 flex-shrink-0 text-brand-green" fill="none" viewBox="0 0 16 16" aria-hidden="true"><path d="M3 8l3 3 7-7" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
-            AI fleet platform beta launched
-          </li>
-        </ul>
-      </div>
-      <div class="card card-accent p-8 fade-up d2" style="width:340px;" role="listitem">
-        <div class="font-syne font-bold text-4xl text-brand-green mb-1">2027</div>
-        <div class="font-dm font-medium text-xs uppercase tracking-widest text-tx-muted mb-4">Phase 2 — Scale</div>
-        <ul class="space-y-3">
-          <li class="flex items-start gap-2 font-dm text-sm text-tx-mid">
-            <svg class="w-4 h-4 mt-0.5 flex-shrink-0 text-brand-green" fill="none" viewBox="0 0 16 16" aria-hidden="true"><path d="M3 8l3 3 7-7" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
-            Scale fleet inventory to meet LTA procurement cycle
-          </li>
-          <li class="flex items-start gap-2 font-dm text-sm text-tx-mid">
-            <svg class="w-4 h-4 mt-0.5 flex-shrink-0 text-brand-green" fill="none" viewBox="0 0 16 16" aria-hidden="true"><path d="M3 8l3 3 7-7" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
-            Expand charging network across depots
-          </li>
-          <li class="flex items-start gap-2 font-dm text-sm text-tx-mid">
-            <svg class="w-4 h-4 mt-0.5 flex-shrink-0 text-brand-green" fill="none" viewBox="0 0 16 16" aria-hidden="true"><path d="M3 8l3 3 7-7" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
-            Parts warehouse operational nationally
-          </li>
-          <li class="flex items-start gap-2 font-dm text-sm text-tx-mid">
-            <svg class="w-4 h-4 mt-0.5 flex-shrink-0 text-brand-green" fill="none" viewBox="0 0 16 16" aria-hidden="true"><path d="M3 8l3 3 7-7" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
-            Malaysia and Thailand market entry
-          </li>
-        </ul>
-      </div>
-      <div class="card card-accent p-8 fade-up d3" style="width:340px;" role="listitem">
-        <div class="font-syne font-bold text-4xl text-brand-green mb-1">2028</div>
-        <div class="font-dm font-medium text-xs uppercase tracking-widest text-tx-muted mb-4">Phase 3 — Dominance</div>
-        <ul class="space-y-3">
-          <li class="flex items-start gap-2 font-dm text-sm text-tx-mid">
-            <svg class="w-4 h-4 mt-0.5 flex-shrink-0 text-brand-green" fill="none" viewBox="0 0 16 16" aria-hidden="true"><path d="M3 8l3 3 7-7" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
-            50,000+ vehicles under management
-          </li>
-          <li class="flex items-start gap-2 font-dm text-sm text-tx-mid">
-            <svg class="w-4 h-4 mt-0.5 flex-shrink-0 text-brand-green" fill="none" viewBox="0 0 16 16" aria-hidden="true"><path d="M3 8l3 3 7-7" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
-            Full ASEAN regional footprint established
-          </li>
-          <li class="flex items-start gap-2 font-dm text-sm text-tx-mid">
-            <svg class="w-4 h-4 mt-0.5 flex-shrink-0 text-brand-green" fill="none" viewBox="0 0 16 16" aria-hidden="true"><path d="M3 8l3 3 7-7" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
-            Charging network profitability reached
-          </li>
-          <li class="flex items-start gap-2 font-dm text-sm text-tx-mid">
-            <svg class="w-4 h-4 mt-0.5 flex-shrink-0 text-brand-green" fill="none" viewBox="0 0 16 16" aria-hidden="true"><path d="M3 8l3 3 7-7" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
-            Series B or strategic acquisition readiness
-          </li>
-        </ul>
-      </div>
-      <!-- Spacer -->
-      <div style="width:1px; flex-shrink:0;" aria-hidden="true"></div>
-    </div>
-
-    <!-- Exit pathways -->
-    <div class="card p-8 fade-up">
-      <h3 class="font-syne font-semibold text-lg text-tx-primary mb-4">Exit Pathways</h3>
-      <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
-        <div class="p-4 rounded-xl" style="background: #F0F4F0;">
-          <div class="font-syne font-semibold text-sm text-brand-green mb-1">Regional Acquisition</div>
-          <div class="font-dm text-sm text-tx-mid">Strategic acquisition by a regional energy, mobility, or infrastructure group seeking integrated EV market access in Southeast Asia.</div>
+  <!-- ============ 6. STATS BENTO ============ -->
+  <section class="section" id="impact">
+    <div class="container">
+      <p class="eyebrow reveal">Impact to date</p>
+      <h2 class="display-2 reveal" style="--stagger: 1">The numbers behind the quiet</h2>
+      <div class="bento">
+        <div class="bento-cell bento-photo bento-tall reveal">
+          <!-- PLACEHOLDER: portrait photo of a driver or depot team -->
+          <div class="bento-photo-placeholder">Portrait photo</div>
         </div>
-        <div class="p-4 rounded-xl" style="background: #F0F4F0;">
-          <div class="font-syne font-semibold text-sm text-brand-green mb-1">Public Listing</div>
-          <div class="font-dm text-sm text-tx-mid">SGX Catalyst Board or Nasdaq listing as the regional EV infrastructure footprint reaches institutional scale.</div>
+        <div class="bento-cell reveal" style="--stagger: 1">
+          <span class="num" data-count="240" data-suffix="+">240+</span>
+          <span class="label">Vehicles electrified</span>
+        </div>
+        <div class="bento-cell reveal" style="--stagger: 2">
+          <span class="num" data-count="98.6" data-suffix="%">98.6%</span>
+          <span class="label">Fleet uptime</span>
+        </div>
+        <div class="bento-cell bento-photo bento-tall reveal" style="--stagger: 3">
+          <!-- PLACEHOLDER: portrait photo of a vehicle at dusk -->
+          <div class="bento-photo-placeholder">Portrait photo</div>
+        </div>
+        <div class="bento-cell reveal" style="--stagger: 1">
+          <span class="num" data-count="38">38</span>
+          <span class="label">Depot charge points</span>
+        </div>
+        <div class="bento-cell reveal" style="--stagger: 2">
+          <span class="num" data-count="9.2" data-suffix="M km">9.2M km</span>
+          <span class="label">Driven electric</span>
+        </div>
+        <div class="bento-cell bento-wide reveal" style="--stagger: 3">
+          <span class="num" data-count="12400" data-suffix=" t">12,400 t</span>
+          <span class="label">CO₂e avoided</span>
         </div>
       </div>
     </div>
-  </div>
-</section>
+  </section>
 
-<!-- ============================================================ 10 TEAM ============================================================ -->
-<section id="team" class="section-pad" style="background: #F7F6F2;" aria-labelledby="team-headline">
-  <div class="max-w-[1200px] mx-auto px-6">
-    <div class="max-w-2xl mb-16 fade-up">
-      <span class="font-dm font-medium text-xs uppercase tracking-[0.12em] text-tx-muted mb-3 block">10 / Team</span>
-      <h2 id="team-headline" class="font-syne font-bold text-5xl md:text-6xl text-tx-primary leading-tight">Built by Someone<br>Who's Done It.</h2>
-    </div>
-
-    <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-12">
-      <!-- Founder card -->
-      <div class="card card-accent p-8 fade-up d1">
-        <div class="flex items-start gap-5">
-          <div class="w-16 h-16 rounded-full flex-shrink-0 flex items-center justify-center font-syne font-bold text-xl text-white" style="background: #1A4D3A;" aria-hidden="true">JN</div>
-          <div class="flex-1">
-            <div class="font-syne font-bold text-xl text-tx-primary mb-0.5">Jeremiah Ng</div>
-            <div class="font-dm text-sm font-medium text-brand-green mb-3">CFOO — Chief Financial &amp; Operating Officer</div>
-            <p class="font-dm text-sm text-tx-mid leading-relaxed mb-4">12 years in commercial transport operations. Architected Amagi Carriage's EV pivot. Closed Singapore's first international integrated EV solution deployment in Thailand.</p>
-            <a href="#" class="inline-flex items-center gap-2 font-dm text-sm text-brand-green hover:text-brand-green-mid transition-colors duration-150 cursor-pointer" aria-label="Jeremiah Ng LinkedIn profile">
-              <svg width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true"><rect width="16" height="16" rx="2" fill="#1A4D3A"/><path d="M4 6h2v6H4V6zm1-2a1 1 0 100 2 1 1 0 000-2zM7 6h2v.8C9.4 6.3 10 6 11 6c2 0 2 1.5 2 3v3h-2V9c0-1 0-1.5-.8-1.5-.9 0-1.2.7-1.2 1.5v3H7V6z" fill="white"/></svg>
-              LinkedIn Profile
-            </a>
-          </div>
-        </div>
-      </div>
-
-      <!-- Advisors placeholder -->
-      <div class="card p-8 fade-up d2 flex flex-col items-center justify-center text-center" style="border-style: dashed;">
-        <div class="w-12 h-12 rounded-full border-2 border-dashed border-[#E2E4DF] flex items-center justify-center mb-4" aria-hidden="true">
-          <svg width="20" height="20" viewBox="0 0 20 20" fill="none" aria-hidden="true"><path d="M10 4v12M4 10h12" stroke="#9CA3AF" stroke-width="1.5" stroke-linecap="round"/></svg>
-        </div>
-        <div class="font-syne font-semibold text-sm text-tx-muted mb-2">Advisors &amp; Board</div>
-        <div class="font-dm text-sm text-tx-muted max-w-xs">Advisor and board member appointments are being finalised. Confirmed additions will appear here prior to launch.</div>
+  <!-- ============ 7. CLOSING CTA ============ -->
+  <section class="closing" id="contact">
+    <div class="container">
+      <h2 class="display-2 reveal" style="color: var(--accent);">Ready to electrify your fleet?</h2>
+      <p class="lede reveal" style="--stagger: 1">Talk to our team about a route audit — we'll map your transition, depot by depot.</p>
+      <div class="closing-actions reveal" style="--stagger: 2">
+        <a class="btn btn--gold" href="mailto:info@zhenghe.com.sg">Book a consultation</a>
+        <a class="btn" href="#solutions">Explore solutions</a>
       </div>
     </div>
+  </section>
 
-    <!-- Trust bar -->
-    <div class="fade-up text-center pt-8 border-t border-[#E2E4DF]">
-      <div class="font-dm text-xs uppercase tracking-widest text-tx-muted mb-6">Client Relationships</div>
-      <div class="flex items-center justify-center flex-wrap gap-12">
-        <span class="trust-logo">SMRT</span>
-        <span class="trust-logo">Comfort Delgro</span>
-        <span class="trust-logo">LTA</span>
-      </div>
+</main>
+
+<!-- ============ 8. FOOTER ============ -->
+<footer class="footer">
+  <div class="container footer-inner">
+    <a class="nav-logo" href="#top">Amagi<span>&nbsp;Carriage</span></a>
+    <a href="mailto:info@zhenghe.com.sg">info@zhenghe.com.sg</a><!-- swap if your public contact differs -->
+    <div class="footer-social">
+      <a href="#" aria-label="LinkedIn">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M20.45 20.45h-3.55v-5.57c0-1.33-.03-3.04-1.85-3.04-1.86 0-2.14 1.45-2.14 2.94v5.67H9.35V9h3.41v1.56h.05c.47-.9 1.63-1.85 3.36-1.85 3.6 0 4.27 2.37 4.27 5.45v6.29zM5.34 7.43a2.06 2.06 0 1 1 0-4.12 2.06 2.06 0 0 1 0 4.12zM7.12 20.45H3.56V9h3.56v11.45z"/></svg>
+      </a>
+      <a href="#" aria-label="Instagram">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.2" cy="6.8" r="0.8" fill="currentColor" stroke="none"/></svg>
+      </a>
+      <a href="#" aria-label="YouTube">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><rect x="2.5" y="5.5" width="19" height="13" rx="3.5"/><path d="M10 9.5v5l4.5-2.5L10 9.5z" fill="currentColor" stroke="none"/></svg>
+      </a>
     </div>
-  </div>
-</section>
-
-<!-- ============================================================ 11 CONTACT / CTA ============================================================ -->
-<section id="contact" class="section-pad" style="background: #1A4D3A;" aria-labelledby="contact-headline">
-  <div class="max-w-[1200px] mx-auto px-6">
-    <div class="grid grid-cols-1 lg:grid-cols-2 gap-16">
-      <!-- Left -->
-      <div class="fade-up">
-        <span class="font-dm font-medium text-xs uppercase tracking-[0.12em] mb-4 block" style="color: rgba(168,213,181,0.7);">11 / Contact</span>
-        <h2 id="contact-headline" class="font-syne font-bold text-5xl md:text-6xl text-white leading-tight mb-6">Closing June 30, 2026.<br>Let's Talk.</h2>
-        <p class="font-dm text-lg leading-relaxed mb-8" style="color: #A8D5B5;">Request access to the data room — full financial projections, legal agreements, and detailed term sheet. Or write to us directly.</p>
-
-        <!-- Countdown -->
-        <div class="inline-flex items-center gap-3 rounded-xl px-5 py-3 mb-8" style="background: rgba(255,255,255,0.1); border: 1px solid rgba(255,255,255,0.15);" aria-live="polite" aria-label="Countdown to closing date">
-          <svg width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true"><circle cx="8" cy="8" r="6.5" stroke="rgba(168,213,181,0.8)" stroke-width="1.2"/><path d="M8 4.5v3.5l2 2" stroke="rgba(168,213,181,0.8)" stroke-width="1.2" stroke-linecap="round"/></svg>
-          <span class="font-syne font-semibold text-white" id="countdown-val">--</span>
-          <span class="font-dm text-sm" style="color: #A8D5B5;">days until close</span>
-        </div>
-
-        <div class="space-y-3">
-          <div class="font-dm text-sm" style="color: #A8D5B5;">Or reach out directly:</div>
-          <a href="mailto:" class="flex items-center gap-2 font-dm text-white hover:text-[#6BCF97] transition-colors duration-150 cursor-pointer">
-            <svg width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true"><rect x="1" y="3" width="14" height="10" rx="1.5" stroke="currentColor" stroke-width="1.2"/><path d="M1 5l7 5 7-5" stroke="currentColor" stroke-width="1.2" stroke-linecap="round"/></svg>
-
-          </a>
-        </div>
-
-        <div class="mt-10">
-          <a href="#contact" class="btn-ghost" aria-label="Download the overview deck">Download the Overview Deck</a>
-        </div>
-      </div>
-
-      <!-- Form -->
-      <div class="fade-up d2">
-        <div class="card p-8">
-          <div id="form-success" class="hidden text-center py-8">
-            <div class="w-14 h-14 rounded-full bg-[#F0F4F0] flex items-center justify-center mx-auto mb-4" aria-hidden="true">
-              <svg width="24" height="24" viewBox="0 0 24 24" fill="none"><path d="M5 12l5 5 9-9" stroke="#1A4D3A" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
-            </div>
-            <h3 class="font-syne font-bold text-xl text-tx-primary mb-2">Request Received</h3>
-            <p class="font-dm text-sm text-tx-mid">Thank you. Jeremiah will respond personally within 24 hours.</p>
-          </div>
-
-          <form id="data-room-form" class="space-y-4" novalidate>
-            <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
-              <div>
-                <label for="f-name">Full Name <span class="text-red-400" aria-hidden="true">*</span></label>
-                <input id="f-name" name="name" type="text" class="form-input" placeholder="Jeremiah Ng" required autocomplete="name">
-              </div>
-              <div>
-                <label for="f-org">Organisation <span class="text-red-400" aria-hidden="true">*</span></label>
-                <input id="f-org" name="organisation" type="text" class="form-input" placeholder="GIC, Temasek, etc." required autocomplete="organization">
-              </div>
-            </div>
-            <div>
-              <label for="f-role">Role</label>
-              <input id="f-role" name="role" type="text" class="form-input" placeholder="Partner, Principal, Director..." autocomplete="organization-title">
-            </div>
-            <div>
-              <label for="f-email">Email <span class="text-red-400" aria-hidden="true">*</span></label>
-              <input id="f-email" name="email" type="email" class="form-input" placeholder="you@fund.com" required autocomplete="email">
-            </div>
-            <div>
-              <label for="f-range">Investment Range</label>
-              <select id="f-range" name="investment_range" class="form-input cursor-pointer">
-                <option value="" disabled selected>Select a range...</option>
-                <option value="under_500k">Under S$500K</option>
-                <option value="500k_2m">S$500K – S$2M</option>
-                <option value="2m_5m">S$2M – S$5M</option>
-                <option value="5m_plus">S$5M+</option>
-              </select>
-            </div>
-            <div>
-              <label for="f-message">Message (optional)</label>
-              <textarea id="f-message" name="message" rows="3" class="form-input resize-none" placeholder="Any specific questions or context for the conversation..."></textarea>
-            </div>
-            <div class="flex items-start gap-3">
-              <input id="f-accredited" name="accredited" type="checkbox" class="w-4 h-4 mt-0.5 flex-shrink-0 accent-[#1A4D3A] cursor-pointer" required>
-              <label for="f-accredited" class="font-dm text-xs text-tx-mid leading-relaxed cursor-pointer" style="margin-bottom:0;">
-                I confirm I am an accredited investor as defined under the Singapore Securities and Futures Act, and I understand this is a confidential investor communication. <span class="text-red-400" aria-hidden="true">*</span>
-              </label>
-            </div>
-            <div id="form-error" class="hidden font-dm text-sm text-red-500 bg-red-50 rounded-lg px-4 py-3" role="alert"></div>
-            <button type="submit" id="form-submit" class="btn-primary w-full text-center cursor-pointer">Request Data Room Access</button>
-          </form>
-        </div>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- Footer -->
-<footer style="background: #1A4D3A; border-top: 1px solid rgba(255,255,255,0.08);">
-  <div class="max-w-[1200px] mx-auto px-6 py-8 flex flex-col md:flex-row items-center justify-between gap-4">
-    <div class="flex items-center gap-2">
-      <span class="w-2 h-2 rounded-full bg-[#4ade80]" aria-hidden="true"></span>
-      <span class="font-syne font-bold text-sm text-white">Powering Green</span>
-      <span class="font-dm text-xs" style="color: rgba(168,213,181,0.5);">/ Amagi Carriage Pte Ltd</span>
-    </div>
-    <div class="font-dm text-xs text-center" style="color: rgba(168,213,181,0.5);">Series A · Closing June 30, 2026 · Confidential — for qualified investors only</div>
-    <div class="font-dm text-xs" style="color: rgba(168,213,181,0.5);">© 2026 Amagi Carriage Pte Ltd</div>
+    <p class="footer-copy">© 2026 Amagi Carriage Pte. Ltd. All rights reserved.</p>
   </div>
 </footer>
 
-<!-- ============================================================ JS ============================================================ -->
 <script>
-(function() {
-  'use strict';
+// Sticky nav: frost the bar once the page scrolls
+const nav = document.getElementById('nav');
+const onScroll = () => nav.classList.toggle('is-scrolled', window.scrollY > 24);
+onScroll();
+window.addEventListener('scroll', onScroll, { passive: true });
 
-  // ---- NAV SCROLL TRANSITION ----
-  const nav = document.getElementById('nav');
-  const hero = document.getElementById('hero');
-  let heroHeight = hero ? hero.offsetHeight : 600;
-
-  function updateNav() {
-    const scrolled = window.scrollY > heroHeight - 80;
-    nav.classList.toggle('scrolled', scrolled);
-    // Update nav link colours when over hero
-    const links = nav.querySelectorAll('.nav-link');
-    const logo = nav.querySelector('.nav-logo');
-    const cta = nav.querySelector('.nav-cta');
-    const mobileBtn = nav.querySelector('.mobile-btn');
-    if (scrolled) {
-      links.forEach(l => { l.style.color = ''; });
-      if (logo) logo.style.color = '';
-    } else {
-      links.forEach(l => { l.style.color = 'rgba(255,255,255,0.8)'; });
-      if (logo) logo.style.color = '#fff';
-    }
-  }
-
-  window.addEventListener('scroll', updateNav, { passive: true });
-  window.addEventListener('resize', () => { heroHeight = hero ? hero.offsetHeight : 600; updateNav(); }, { passive: true });
-  updateNav();
-
-  // ---- MOBILE MENU ----
-  const hamburger = document.getElementById('hamburger');
-  const mobileMenu = document.getElementById('mobile-menu');
-  const closeMenuBtn = document.getElementById('close-menu');
-
-  function openMobileMenu() {
-    mobileMenu.classList.add('open');
-    document.body.style.overflow = 'hidden';
-    hamburger.setAttribute('aria-expanded', 'true');
-  }
-  window.closeMobileMenu = function() {
-    mobileMenu.classList.remove('open');
-    document.body.style.overflow = '';
-    hamburger.setAttribute('aria-expanded', 'false');
-  };
-  if (hamburger) hamburger.addEventListener('click', openMobileMenu);
-  if (closeMenuBtn) closeMenuBtn.addEventListener('click', closeMobileMenu);
-
-  // ---- SCROLL SPY ----
-  const sections = ['hero','problem','market','solution','financials','edge','terms','funds','roadmap','team','contact'];
-  const sectionMap = {
-    'hero':'hero','problem':'problem','market':'market','solution':'solution',
-    'financials':'financials','edge':'edge','terms':'terms','funds':'funds',
-    'roadmap':'roadmap','team':'team','contact':'contact'
-  };
-  const navLinks = nav.querySelectorAll('.nav-link');
-
-  function getActiveSection() {
-    let current = 'hero';
-    for (const id of sections) {
-      const el = document.getElementById(id);
-      if (el && window.scrollY >= el.offsetTop - 120) current = id;
-    }
-    return current;
-  }
-
-  function updateScrollSpy() {
-    const active = getActiveSection();
-    navLinks.forEach(link => {
-      const sec = link.getAttribute('data-section');
-      link.classList.toggle('active', sec === active);
-    });
-  }
-
-  window.addEventListener('scroll', updateScrollSpy, { passive: true });
-
-  // ---- FADE UP (IntersectionObserver) ----
-  const fadeEls = document.querySelectorAll('.fade-up');
-  if ('IntersectionObserver' in window) {
-    const io = new IntersectionObserver((entries) => {
-      entries.forEach(entry => {
-        if (entry.isIntersecting) {
-          entry.target.classList.add('visible');
-          io.unobserve(entry.target);
-        }
-      });
-    }, { threshold: 0.1, rootMargin: '0px 0px -40px 0px' });
-    fadeEls.forEach(el => io.observe(el));
-  } else {
-    fadeEls.forEach(el => el.classList.add('visible'));
-  }
-
-  // ---- STAT COUNTERS ----
-  function easeOutExpo(t) { return t === 1 ? 1 : 1 - Math.pow(2, -10 * t); }
-
-  function animateCounter(el) {
-    const target = parseInt(el.getAttribute('data-count'), 10);
-    const prefix = el.getAttribute('data-prefix') || '';
-    const suffix = el.getAttribute('data-suffix') || '';
-    const duration = 1200;
-    const start = performance.now();
-
-    function step(now) {
-      const elapsed = now - start;
-      const progress = Math.min(elapsed / duration, 1);
-      const eased = easeOutExpo(progress);
-      const value = Math.round(eased * target);
-      const formatted = value >= 1000 ? value.toLocaleString() : value.toString();
-      el.textContent = prefix + formatted + suffix;
-      if (progress < 1) requestAnimationFrame(step);
-    }
-    requestAnimationFrame(step);
-  }
-
-  const statEls = document.querySelectorAll('[data-count]');
-  if ('IntersectionObserver' in window) {
-    const statIO = new IntersectionObserver((entries) => {
-      entries.forEach(entry => {
-        if (entry.isIntersecting) {
-          animateCounter(entry.target);
-          statIO.unobserve(entry.target);
-        }
-      });
-    }, { threshold: 0.5 });
-    statEls.forEach(el => statIO.observe(el));
-  }
-
-  // ---- COUNTDOWN ----
-  function updateCountdown() {
-    const close = new Date('2026-06-30T23:59:59+08:00');
-    const now = new Date();
-    const diff = close - now;
-    const days = Math.max(0, Math.floor(diff / (1000 * 60 * 60 * 24)));
-    const el = document.getElementById('countdown-val');
-    if (el) el.textContent = days;
-  }
-  updateCountdown();
-  setInterval(updateCountdown, 60000);
-
-  // ---- FORM HANDLING ----
-  const form = document.getElementById('data-room-form');
-  const formSuccess = document.getElementById('form-success');
-  const formError = document.getElementById('form-error');
-  const submitBtn = document.getElementById('form-submit');
-
-  if (form) {
-    form.addEventListener('submit', function(e) {
-      e.preventDefault();
-      formError.classList.add('hidden');
-
-      const name = document.getElementById('f-name').value.trim();
-      const org  = document.getElementById('f-org').value.trim();
-      const email = document.getElementById('f-email').value.trim();
-      const accredited = document.getElementById('f-accredited').checked;
-
-      if (!name) { showError('Please enter your full name.'); return; }
-      if (!org)  { showError('Please enter your organisation.'); return; }
-      if (!email || !email.includes('@')) { showError('Please enter a valid email address.'); return; }
-      if (!accredited) { showError('Please confirm you are an accredited investor to proceed.'); return; }
-
-      submitBtn.disabled = true;
-      submitBtn.textContent = 'Sending...';
-
-      // Simulate submission (replace with actual endpoint)
-      setTimeout(() => {
-        form.style.display = 'none';
-        formSuccess.classList.remove('hidden');
-      }, 800);
-    });
-  }
-
-  function showError(msg) {
-    formError.textContent = msg;
-    formError.classList.remove('hidden');
-    formError.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
-  }
-
-  // ---- HERO LOAD ANIMATION ----
-  const heroFadeEls = hero ? hero.querySelectorAll('.fade-up') : [];
-  setTimeout(() => {
-    heroFadeEls.forEach(el => el.classList.add('visible'));
-  }, 100);
-
-})();
-
-// ---- DRAG-TO-SCROLL ----
-(function() {
-  function makeDraggable(el) {
-    let isDown = false, startX, scrollLeft;
-    el.addEventListener('mousedown', e => {
-      isDown = true;
-      el.classList.add('is-dragging');
-      startX = e.pageX - el.getBoundingClientRect().left;
-      scrollLeft = el.scrollLeft;
-    });
-    el.addEventListener('mouseleave', () => { isDown = false; el.classList.remove('is-dragging'); });
-    el.addEventListener('mouseup', () => { isDown = false; el.classList.remove('is-dragging'); });
-    el.addEventListener('mousemove', e => {
-      if (!isDown) return;
-      e.preventDefault();
-      const x = e.pageX - el.getBoundingClientRect().left;
-      el.scrollLeft = scrollLeft - (x - startX) * 1.4;
-    });
-  }
-  document.querySelectorAll('.drag-scroll').forEach(makeDraggable);
-})();
-
-// ---- SECTION PROGRESS DOTS ----
-(function() {
-  const dotSections = ['hero','problem','market','solution','financials','edge','terms','funds','roadmap','team','contact'];
-  const nav = document.createElement('nav');
-  nav.setAttribute('aria-label', 'Section progress');
-  nav.style.cssText = 'position:fixed; right:20px; top:50%; transform:translateY(-50%); z-index:40; display:flex; flex-direction:column; gap:8px; pointer-events:auto;';
-
-  const dotEls = dotSections.map((id, i) => {
-    const d = document.createElement('button');
-    d.style.cssText = 'width:8px; height:8px; border-radius:50%; border:1.5px solid rgba(26,77,58,0.35); background:transparent; cursor:pointer; transition:background 200ms, border-color 200ms, transform 200ms; padding:0; outline:none;';
-    d.setAttribute('aria-label', 'Go to section ' + (i + 1));
-    d.addEventListener('click', () => {
-      const sec = document.getElementById(id);
-      if (sec) sec.scrollIntoView({ behavior: 'smooth' });
-    });
-    nav.appendChild(d);
-    return d;
-  });
-
-  document.body.appendChild(nav);
-
-  function updateDots() {
-    let current = 0;
-    for (let i = 0; i < dotSections.length; i++) {
-      const el = document.getElementById(dotSections[i]);
-      if (el && window.scrollY >= el.offsetTop - 160) current = i;
-    }
-    // Adjust dot style based on whether we're in a dark section (hero/contact)
-    const inDark = dotSections[current] === 'hero' || dotSections[current] === 'contact';
-    dotEls.forEach((d, i) => {
-      if (i === current) {
-        d.style.background = inDark ? '#fff' : '#1A4D3A';
-        d.style.borderColor = inDark ? '#fff' : '#1A4D3A';
-        d.style.transform = 'scale(1.4)';
-      } else {
-        d.style.background = 'transparent';
-        d.style.borderColor = inDark ? 'rgba(255,255,255,0.4)' : 'rgba(26,77,58,0.3)';
-        d.style.transform = 'scale(1)';
+// Scroll reveal: fade + 20px rise, staggered via --stagger custom property
+const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+const revealEls = document.querySelectorAll('.reveal');
+if (reduceMotion || !('IntersectionObserver' in window)) {
+  revealEls.forEach(el => el.classList.add('is-visible'));
+} else {
+  const io = new IntersectionObserver(entries => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('is-visible');
+        io.unobserve(entry.target);
       }
     });
-  }
+  }, { threshold: 0.15, rootMargin: '0px 0px -40px 0px' });
+  revealEls.forEach(el => io.observe(el));
+}
 
-  window.addEventListener('scroll', updateDots, { passive: true });
-  updateDots();
-
-  // Hide on very small screens
-  function checkSize() { nav.style.display = window.innerWidth < 768 ? 'none' : 'flex'; }
-  window.addEventListener('resize', checkSize, { passive: true });
-  checkSize();
-})();
-
-// ---- MAGNETIC DOT GRID ----
-(function() {
-  if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
-  if (window.innerWidth < 768) return; // desktop only
-
-  const canvas = document.getElementById('hero-canvas');
-  if (!canvas) return;
-  const ctx = canvas.getContext('2d');
-
-  const SPACING   = 54;   // px between dots
-  const R         = 1.8;  // dot radius
-  const REACH     = 160;  // mouse influence radius (px)
-  const PULL      = 0.55; // attraction strength
-  const SPRING    = 0.055;// spring-back stiffness
-  const DAMP      = 0.78; // velocity damping (< 1)
-
-  let W, H, dots;
-  let mx = -9999, my = -9999; // mouse in canvas coords
-
-  function build() {
-    const hero = document.getElementById('hero');
-    W = hero.offsetWidth;
-    H = hero.offsetHeight;
-    canvas.width  = W;
-    canvas.height = H;
-
-    dots = [];
-    const cols = Math.ceil(W / SPACING) + 1;
-    const rows = Math.ceil(H / SPACING) + 1;
-    const offX = (W - (cols - 1) * SPACING) / 2;
-    const offY = (H - (rows - 1) * SPACING) / 2;
-
-    for (let r = 0; r < rows; r++) {
-      for (let c = 0; c < cols; c++) {
-        const hx = offX + c * SPACING;
-        const hy = offY + r * SPACING;
-        dots.push({ hx, hy, x: hx, y: hy, vx: 0, vy: 0 });
-      }
-    }
-  }
-
-  function tick() {
-    ctx.clearRect(0, 0, W, H);
-
-    for (const d of dots) {
-      // Mouse force
-      const dx = mx - d.x;
-      const dy = my - d.y;
-      const dist = Math.sqrt(dx * dx + dy * dy) || 1;
-      if (dist < REACH) {
-        const f = ((REACH - dist) / REACH) * PULL;
-        d.vx += (dx / dist) * f;
-        d.vy += (dy / dist) * f;
-      }
-
-      // Spring back to home
-      d.vx += (d.hx - d.x) * SPRING;
-      d.vy += (d.hy - d.y) * SPRING;
-
-      // Damping
-      d.vx *= DAMP;
-      d.vy *= DAMP;
-
-      d.x += d.vx;
-      d.y += d.vy;
-
-      // Draw dot — brighter near cursor
-      const proximity = Math.max(0, 1 - (Math.sqrt((mx - d.x) ** 2 + (my - d.y) ** 2) / REACH));
-      const alpha = 0.13 + proximity * 0.32;
-      ctx.beginPath();
-      ctx.arc(d.x, d.y, R, 0, Math.PI * 2);
-      ctx.fillStyle = `rgba(255,255,255,${alpha})`;
-      ctx.fill();
-    }
-
-    requestAnimationFrame(tick);
-  }
-
-  // Track mouse in canvas-local coords
-  window.addEventListener('mousemove', e => {
-    const rect = canvas.getBoundingClientRect();
-    mx = e.clientX - rect.left;
-    my = e.clientY - rect.top + window.scrollY; // account for scroll within hero
-  }, { passive: true });
-
-  window.addEventListener('mouseleave', () => { mx = -9999; my = -9999; });
-
-  // Recalc on resize
-  let resizeTimer;
-  window.addEventListener('resize', () => {
-    clearTimeout(resizeTimer);
-    resizeTimer = setTimeout(build, 150);
-  }, { passive: true });
-
-  build();
-  requestAnimationFrame(tick);
-})();
+// Stat count-up on first view (skipped under reduced motion; markup already holds final values)
+if (!reduceMotion && 'IntersectionObserver' in window) {
+  const fmt = new Intl.NumberFormat('en-SG');
+  const statIo = new IntersectionObserver(entries => {
+    entries.forEach(entry => {
+      if (!entry.isIntersecting) return;
+      statIo.unobserve(entry.target);
+      const el = entry.target;
+      const target = parseFloat(el.dataset.count);
+      const suffix = el.dataset.suffix || '';
+      const decimals = (el.dataset.count.split('.')[1] || '').length;
+      const start = performance.now();
+      const dur = 1400;
+      const tick = now => {
+        const t = Math.min((now - start) / dur, 1);
+        const eased = 1 - Math.pow(1 - t, 3);
+        const val = target * eased;
+        el.textContent = (decimals ? val.toFixed(decimals) : fmt.format(Math.round(val))) + suffix;
+        if (t < 1) requestAnimationFrame(tick);
+      };
+      requestAnimationFrame(tick);
+    });
+  }, { threshold: 0.6 });
+  document.querySelectorAll('.num[data-count]').forEach(el => statIo.observe(el));
+}
 </script>
 </body>
 </html>
