@@ -75,6 +75,11 @@ td.gold { color: var(--accent); font-weight: 500; white-space: nowrap; }
 .tick { display: flex; gap: 20px; align-items: flex-start; font-size: 28px; color: var(--muted); line-height: 1.5; }
 .tick::before { content: "✓"; color: var(--accent-alt); font-size: 28px; line-height: 1.5; }
 .ticks { display: grid; gap: 26px; }
+.fly-node {
+  padding: 20px 44px; border-radius: 60px;
+  background: rgba(8,22,20,0.9); border: 1px solid rgba(233,215,177,0.5);
+  font-size: 30px; font-weight: 500; letter-spacing: 0.16em; text-transform: uppercase; color: var(--accent);
+}
 
 .bar-row { display: grid; grid-template-columns: 460px 1fr 170px; gap: 36px; align-items: center; margin-bottom: 34px; }
 .bar-row .use { font-size: 30px; }
@@ -103,10 +108,12 @@ td.gold { color: var(--accent); font-weight: 500; white-space: nowrap; }
     <div class="card"><div class="num">2022</div><h3>The electric pivot</h3><p>Evolved into integrated EV solutions as fleet electrification demand accelerated across the region.</p></div>
     <div class="card"><div class="num">2026</div><h3>Amargi Carriage</h3><p>A dedicated integrated EV reseller and provider: vehicles, parts, and charging as one ecosystem.</p></div>
   </div>
-  <div class="ticks" style="margin-top: 30px; grid-template-columns: 1fr 1fr 1fr; display: grid;">
-    <div class="tick">Long-standing corporate clients including SMRT and ComfortDelGro</div>
-    <div class="tick">Operations extended into Thailand and Malaysia</div>
-    <div class="tick">First integrated EV solution pilot deployed in Thailand</div>
+  <div class="card" style="margin-top: 28px; padding: 34px 44px;">
+    <div class="ticks" style="grid-template-columns: 1fr 1fr 1fr; display: grid; gap: 40px;">
+      <div class="tick">Long-standing corporate clients including SMRT and ComfortDelGro</div>
+      <div class="tick">Operations extended into Thailand and Malaysia</div>
+      <div class="tick">First integrated EV solution pilot deployed in Thailand</div>
+    </div>
   </div>
   <div class="foot"><img src="amargi-logo.png" alt=""><span>Series A · Confidential</span><span>02</span></div>
 </section>
@@ -116,9 +123,9 @@ td.gold { color: var(--accent); font-weight: 500; white-space: nowrap; }
   <p class="eyebrow">02 · The market</p>
   <h2>The commercial EV tipping point</h2>
   <div class="grid cols-3" style="align-content: center; flex: 1;">
-    <div class="stat"><div class="big">$260B</div><div class="label">Global commercial EV market by 2026, entering hyper-growth</div></div>
-    <div class="stat"><div class="big">14×</div><div class="label">Light commercial EV demand: 1.14M units today to 16M+ by 2035</div></div>
-    <div class="stat"><div class="big">SEA</div><div class="label">Our focus: Southeast Asia, where OEM production meets infrastructure buildout</div></div>
+    <div class="card stat" style="padding: 60px 52px;"><div class="big">$260B</div><div class="label">Global commercial EV market by 2026, entering hyper-growth</div></div>
+    <div class="card stat" style="padding: 60px 52px;"><div class="big">14×</div><div class="label">Light commercial EV demand: 1.14M units today to 16M+ by 2035</div></div>
+    <div class="card stat" style="padding: 60px 52px;"><div class="big">SEA</div><div class="label">Our focus: Southeast Asia, where OEM production meets infrastructure buildout</div></div>
   </div>
   <div class="foot"><img src="amargi-logo.png" alt=""><span>Series A · Confidential</span><span>03</span></div>
 </section>
@@ -140,12 +147,34 @@ td.gold { color: var(--accent); font-weight: 500; white-space: nowrap; }
 <section class="slide">
   <p class="eyebrow">04 · Our solution</p>
   <h2>The resell · charge · parts flywheel</h2>
-  <div class="grid cols-3">
-    <div class="card"><div class="num">RESELL</div><h3>Commercial EV sales</h3><p>Large electric buses and e-taxis through proven OEM partnerships, an asset-light reseller model.</p></div>
-    <div class="card"><div class="num">CHARGE</div><h3>Solar charging hubs</h3><p>On-site solar generation, battery storage, and fast DC charging built for fleet schedules.</p></div>
-    <div class="card"><div class="num">PARTS</div><h3>Spare parts wholesale</h3><p>Regional inventory hub for batteries, motors, AC/DC components, tyres, and brake parts.</p></div>
+  <div style="display: grid; grid-template-columns: 760px 1fr; gap: 90px; flex: 1; align-items: center;">
+    <div style="position: relative; width: 700px; height: 700px; margin-top: -30px;">
+      <svg viewBox="0 0 700 700" width="700" height="700" style="position: absolute; inset: 0;">
+        <defs>
+          <marker id="arrow" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="9" markerHeight="9" orient="auto-start-reverse">
+            <path d="M0 0 L10 5 L0 10 z" fill="#E8C583"/>
+          </marker>
+        </defs>
+        <circle cx="350" cy="350" r="240" fill="none" stroke="rgba(233,215,177,0.14)" stroke-width="2" stroke-dasharray="3 10"/>
+        <path d="M424.2 121.8 A240 240 0 0 1 578.3 424.2" fill="none" stroke="#E8C583" stroke-width="3" marker-end="url(#arrow)"/>
+        <path d="M510.6 528.3 A240 240 0 0 1 171.7 510.6" fill="none" stroke="#E8C583" stroke-width="3" marker-end="url(#arrow)"/>
+        <path d="M115.2 399.9 A240 240 0 0 1 300.1 115.2" fill="none" stroke="#E8C583" stroke-width="3" marker-end="url(#arrow)"/>
+      </svg>
+      <div style="position: absolute; left: 350px; top: 350px; transform: translate(-50%,-50%); width: 250px; height: 250px; border-radius: 50%; background: rgba(255,255,255,0.04); border: 1px solid var(--glass); display: flex; flex-direction: column; align-items: center; justify-content: center; text-align: center; gap: 14px;">
+        <img src="amargi-logo.png" style="height: 34px; width: auto;" alt="">
+        <span style="font-size: 21px; letter-spacing: 0.2em; color: var(--muted); text-transform: uppercase;">One<br>ecosystem</span>
+      </div>
+      <div class="fly-node" style="position: absolute; left: 350px; top: 110px; transform: translate(-50%,-50%);">Resell</div>
+      <div class="fly-node" style="position: absolute; left: 558px; top: 470px; transform: translate(-50%,-50%);">Charge</div>
+      <div class="fly-node" style="position: absolute; left: 142px; top: 470px; transform: translate(-50%,-50%);">Parts</div>
+    </div>
+    <div style="display: grid; gap: 44px;">
+      <div><h3 style="font-size: 38px; font-weight: 400; color: var(--fg); margin-bottom: 12px;">Resell <span style="color: var(--accent-alt); font-size: 26px;">/ commercial EV sales</span></h3><p style="font-size: 26px; line-height: 1.5; color: var(--muted);">Large electric buses and e-taxis through proven OEM partnerships, an asset-light reseller model.</p></div>
+      <div><h3 style="font-size: 38px; font-weight: 400; color: var(--fg); margin-bottom: 12px;">Charge <span style="color: var(--accent-alt); font-size: 26px;">/ solar charging hubs</span></h3><p style="font-size: 26px; line-height: 1.5; color: var(--muted);">On-site solar generation, battery storage, and fast DC charging built for fleet schedules.</p></div>
+      <div><h3 style="font-size: 38px; font-weight: 400; color: var(--fg); margin-bottom: 12px;">Parts <span style="color: var(--accent-alt); font-size: 26px;">/ spare parts wholesale</span></h3><p style="font-size: 26px; line-height: 1.5; color: var(--muted);">Regional inventory hub for batteries, motors, AC/DC components, tyres, and brake parts.</p></div>
+      <p style="font-size: 28px; color: var(--accent);">Vehicles → parts → renewable charging. Each arm feeds the next.</p>
+    </div>
   </div>
-  <p class="lede" style="margin-top: 40px; color: var(--accent);">One-stop shop: vehicles → parts → renewable charging. Each arm feeds the next.</p>
   <div class="foot"><img src="amargi-logo.png" alt=""><span>Series A · Confidential</span><span>05</span></div>
 </section>
 
@@ -153,13 +182,16 @@ td.gold { color: var(--accent); font-weight: 500; white-space: nowrap; }
 <section class="slide">
   <p class="eyebrow">05 · Market opportunity</p>
   <h2>A S$680M beachhead, a regional runway</h2>
-  <div class="grid cols-2" style="grid-template-columns: 1fr 1fr;">
-    <div class="card stat"><div class="big" style="font-size:96px">5,800</div><div class="label">Singapore buses mandated 100% electric by 2040, yet only 240 are electric today</div></div>
-    <div class="card stat"><div class="big" style="font-size:96px">60,000</div><div class="label">Singapore taxis electrifying fast: 2,500 electric on the road across Strides, ComfortDelGro, and SMRT</div></div>
-    <div class="card stat"><div class="big" style="font-size:96px">S$680M</div><div class="label">Five-year addressable market across vehicle sales, parts, and charging</div></div>
-    <div class="card stat"><div class="big" style="font-size:96px">S$30B</div><div class="label">Projected EV component and commercial vehicle market by 2035</div></div>
+  <div class="grid" style="grid-template-columns: repeat(4, 1fr);">
+    <div class="card stat" style="padding: 44px 40px;"><div class="big" style="font-size:76px">5,800</div><div class="label" style="font-size:23px">Singapore buses mandated 100% electric by 2040; only 240 electric today</div></div>
+    <div class="card stat" style="padding: 44px 40px;"><div class="big" style="font-size:76px">60,000</div><div class="label" style="font-size:23px">Singapore taxis electrifying: 2,500 electric today across Strides, ComfortDelGro, SMRT</div></div>
+    <div class="card stat" style="padding: 44px 40px;"><div class="big" style="font-size:76px">S$680M</div><div class="label" style="font-size:23px">Five-year addressable market: vehicles, parts, and charging</div></div>
+    <div class="card stat" style="padding: 44px 40px;"><div class="big" style="font-size:76px">S$30B</div><div class="label" style="font-size:23px">Projected EV component and commercial vehicle market by 2035</div></div>
+    <div class="card" style="grid-column: 1 / -1; display: flex; align-items: center; justify-content: space-between; padding: 30px 44px;">
+      <span style="font-size: 27px; color: var(--muted);">Regional expansion runway</span>
+      <span style="font-size: 30px; color: var(--accent);">Malaysia · Thailand · Indonesia · Philippines</span>
+    </div>
   </div>
-  <p class="lede" style="margin-top: 36px;">Regional expansion runway: <span style="color: var(--accent);">Malaysia · Thailand · Indonesia · Philippines</span></p>
   <div class="foot"><img src="amargi-logo.png" alt=""><span>Series A · Confidential</span><span>06</span></div>
 </section>
 
@@ -174,7 +206,10 @@ td.gold { color: var(--accent); font-weight: 500; white-space: nowrap; }
     <tr><td>Charging hubs</td><td>Pay-per-use charging plus fleet subscriptions</td><td class="gold">40-50%</td></tr>
     <tr><td>Solar energy sales</td><td>Excess solar sold to grid, offsetting charging costs</td><td class="gold">20-25%</td></tr>
   </table>
-  <p class="lede" style="margin-top: 36px; color: var(--accent);">Blended gross margin target: 25-30%</p>
+  <div class="card" style="margin-top: 40px; display: flex; align-items: center; justify-content: space-between; padding: 30px 44px;">
+    <span style="font-size: 27px; color: var(--muted);">Blended gross margin target</span>
+    <span style="font-size: 34px; font-weight: 500; color: var(--accent);">25-30%</span>
+  </div>
   <div class="foot"><img src="amargi-logo.png" alt=""><span>Series A · Confidential</span><span>07</span></div>
 </section>
 
@@ -221,7 +256,11 @@ td.gold { color: var(--accent); font-weight: 500; white-space: nowrap; }
   <div class="grid cols-3">
     <div class="card"><div class="num">01</div><h3>Investment protection</h3><p>Bond structure ranks ahead of equity, so capital is protected while the business scales.</p></div>
     <div class="card"><div class="num">02</div><h3>Conversion incentives</h3><p>Convert into equity at preferential terms as milestones are hit: upside without re-negotiation.</p></div>
-    <div class="card"><div class="num">03</div><h3>Yield potential</h3><p>Coupon income from day one, backed by secured assets against an upscaling revenue stream.</p></div>
+    <div class="card"><div class="num">03</div><h3>Yield potential</h3><p>Coupon income from day one, with equity upside preserved.</p></div>
+    <div class="card" style="grid-column: 1 / -1; display: flex; align-items: center; justify-content: space-between; padding: 36px 44px;">
+      <span style="font-size: 27px; color: var(--muted);">The structure in one line</span>
+      <span style="font-size: 30px; color: var(--accent);">Secured assets against an upscaling revenue stream</span>
+    </div>
   </div>
   <div class="foot"><img src="amargi-logo.png" alt=""><span>Series A · Confidential</span><span>10</span></div>
 </section>
@@ -247,7 +286,11 @@ td.gold { color: var(--accent); font-weight: 500; white-space: nowrap; }
   <div class="grid cols-3">
     <div class="card"><div class="num">2026</div><h3>Series A &amp; hubs</h3><p>Close the round, secure vehicle inventory, energise the first solar charging hubs.</p></div>
     <div class="card"><div class="num">2027</div><h3>Scale inventory</h3><p>Expand parts warehousing and vehicle stock; deepen operator subscriptions.</p></div>
-    <div class="card"><div class="num">2028</div><h3>50,000+ vehicles</h3><p>Regional scale across SEA. Exit paths: acquisition by a regional energy or mobility player, or IPO on SGX Catalist / Nasdaq.</p></div>
+    <div class="card"><div class="num">2028</div><h3>50,000+ vehicles</h3><p>Regional scale across Southeast Asia, with the flywheel compounding across markets.</p></div>
+    <div class="card" style="grid-column: 1 / -1; display: flex; align-items: center; justify-content: space-between; padding: 36px 44px;">
+      <span style="font-size: 27px; color: var(--muted);">Exit paths</span>
+      <span style="font-size: 30px; color: var(--accent);">Acquisition by a regional energy / mobility player · IPO on SGX Catalist or Nasdaq</span>
+    </div>
   </div>
   <div class="foot"><img src="amargi-logo.png" alt=""><span>Series A · Confidential</span><span>12</span></div>
 </section>
