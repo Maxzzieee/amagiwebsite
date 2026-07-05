@@ -1,0 +1,265 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Amargi Carriage | Series A Deck (print source)</title>
+<!-- This file is the editable source for assets/pitch-deck.pdf.
+     Regenerate with:
+     "/Applications/Google Chrome.app/Contents/MacOS/Google Chrome" --headless=new \
+       --print-to-pdf=assets/pitch-deck.pdf --no-pdf-header-footer \
+       --virtual-time-budget=30000 assets/pitch-deck-src.html -->
+<link href="https://api.fontshare.com/v2/css?f[]=satoshi@300,400,500,700&display=swap" rel="stylesheet">
+<style>
+@page { size: 1920px 1080px; margin: 0; }
+:root {
+  --bg: #081614;
+  --fg: #FFFFFF;
+  --accent: #E9D7B1;
+  --accent-alt: #E8C583;
+  --glass: rgba(255,255,255,0.08);
+  --muted: rgba(255,255,255,0.66);
+}
+* { margin: 0; padding: 0; box-sizing: border-box; }
+body { font-family: "Satoshi", "Helvetica Neue", sans-serif; background: var(--bg); color: var(--fg); -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+.slide {
+  position: relative;
+  width: 1920px;
+  height: 1080px;
+  padding: 110px 140px 130px;
+  overflow: hidden;
+  page-break-after: always;
+  display: flex;
+  flex-direction: column;
+  isolation: isolate;
+}
+.slide-bg { position: absolute; inset: 0; z-index: -1; }
+.slide-bg img { width: 100%; height: 100%; object-fit: cover; }
+.slide-bg::after { content: ""; position: absolute; inset: 0; background: linear-gradient(100deg, rgba(8,22,20,0.94) 35%, rgba(8,22,20,0.55)); }
+
+.eyebrow {
+  font-size: 24px; font-weight: 500; letter-spacing: 0.24em;
+  text-transform: uppercase; color: var(--accent-alt); margin-bottom: 36px;
+}
+h1 { font-size: 132px; font-weight: 300; letter-spacing: -0.04em; line-height: 1.12; text-transform: capitalize; color: var(--accent); }
+h2 { font-size: 84px; font-weight: 300; letter-spacing: -0.035em; line-height: 1.08; text-transform: capitalize; color: var(--accent); margin-bottom: 44px; }
+.lede { font-size: 32px; line-height: 1.55; color: var(--muted); max-width: 1100px; }
+
+.foot {
+  position: absolute; left: 140px; right: 140px; bottom: 52px; z-index: 2;
+  display: flex; align-items: center; justify-content: space-between;
+  font-size: 20px; letter-spacing: 0.14em; text-transform: uppercase; color: rgba(255,255,255,0.4);
+  border-top: 1px solid var(--glass); padding-top: 26px;
+}
+.foot img { height: 30px; opacity: 0.9; }
+
+.grid { display: grid; gap: 28px; flex: 1; align-content: start; }
+.cols-2 { grid-template-columns: 1fr 1fr; }
+.cols-3 { grid-template-columns: 1fr 1fr 1fr; }
+.card {
+  background: rgba(255,255,255,0.035); border: 1px solid var(--glass);
+  border-radius: 24px; padding: 38px 44px;
+}
+.card .num { font-size: 30px; font-weight: 700; color: var(--accent-alt); letter-spacing: 0.1em; margin-bottom: 20px; }
+.card h3 { font-size: 40px; font-weight: 400; letter-spacing: -0.02em; color: var(--fg); margin-bottom: 18px; }
+.card p { font-size: 26px; line-height: 1.5; color: var(--muted); }
+
+.stat .big { font-size: 130px; font-weight: 300; letter-spacing: -0.04em; line-height: 1; color: var(--accent); margin-bottom: 18px; }
+.stat .label { font-size: 25px; letter-spacing: 0.14em; text-transform: uppercase; color: var(--muted); line-height: 1.45; }
+
+table { width: 100%; border-collapse: collapse; font-size: 29px; }
+th { text-align: left; font-weight: 500; letter-spacing: 0.16em; text-transform: uppercase; font-size: 22px; color: var(--accent-alt); padding: 0 36px 24px 0; border-bottom: 1px solid var(--glass); }
+td { padding: 28px 36px 28px 0; border-bottom: 1px solid var(--glass); color: var(--muted); vertical-align: top; }
+td:first-child { color: var(--fg); font-weight: 500; }
+td.gold { color: var(--accent); font-weight: 500; white-space: nowrap; }
+
+.tick { display: flex; gap: 20px; align-items: flex-start; font-size: 28px; color: var(--muted); line-height: 1.5; }
+.tick::before { content: "✓"; color: var(--accent-alt); font-size: 28px; line-height: 1.5; }
+.ticks { display: grid; gap: 26px; }
+
+.bar-row { display: grid; grid-template-columns: 460px 1fr 170px; gap: 36px; align-items: center; margin-bottom: 34px; }
+.bar-row .use { font-size: 30px; }
+.bar-row .amt { font-size: 34px; font-weight: 500; color: var(--accent); text-align: right; }
+.bar { height: 22px; border-radius: 11px; background: rgba(255,255,255,0.06); overflow: hidden; }
+.bar > i { display: block; height: 100%; border-radius: 11px; background: linear-gradient(90deg, #6D5732, var(--accent)); }
+</style>
+</head>
+<body>
+
+<!-- 1 · COVER -->
+<section class="slide" style="justify-content: center;">
+  <div class="slide-bg"><img src="https://images.unsplash.com/photo-1679055324332-189b4a7bc99e?q=70&w=1920&auto=format&fit=crop" alt=""></div>
+  <img src="amargi-logo.png" style="height: 96px; width: auto; align-self: flex-start; margin-bottom: 90px;" alt="Amargi Carriage">
+  <h1>Powering green.<br>Every kilometre, electrified.</h1>
+  <p class="lede" style="margin-top: 44px;">Southeast Asia's integrated commercial EV ecosystem: vehicles, spare parts, and solar-powered charging under one roof.</p>
+  <div class="foot"><span>Series A · 2026</span><span>Jeremiah Ng · CFOO</span><span>Jeremiah@amagi.sg</span></div>
+</section>
+
+<!-- 2 · WHO WE ARE -->
+<section class="slide">
+  <p class="eyebrow">01 · Who we are</p>
+  <h2>Twelve years in commercial transport.<br>Now fully electric.</h2>
+  <div class="grid cols-3">
+    <div class="card"><div class="num">2014</div><h3>Transcool founded</h3><p>Specialists in commercial air-conditioning systems for large vehicles, serving Singapore's biggest operators.</p></div>
+    <div class="card"><div class="num">2022</div><h3>The electric pivot</h3><p>Evolved into integrated EV solutions as fleet electrification demand accelerated across the region.</p></div>
+    <div class="card"><div class="num">2026</div><h3>Amargi Carriage</h3><p>A dedicated integrated EV reseller and provider: vehicles, parts, and charging as one ecosystem.</p></div>
+  </div>
+  <div class="ticks" style="margin-top: 30px; grid-template-columns: 1fr 1fr 1fr; display: grid;">
+    <div class="tick">Long-standing corporate clients including SMRT and ComfortDelGro</div>
+    <div class="tick">Operations extended into Thailand and Malaysia</div>
+    <div class="tick">First integrated EV solution pilot deployed in Thailand</div>
+  </div>
+  <div class="foot"><img src="amargi-logo.png" alt=""><span>Series A · Confidential</span><span>02</span></div>
+</section>
+
+<!-- 3 · MARKET -->
+<section class="slide">
+  <p class="eyebrow">02 · The market</p>
+  <h2>The commercial EV tipping point</h2>
+  <div class="grid cols-3" style="align-content: center; flex: 1;">
+    <div class="stat"><div class="big">$260B</div><div class="label">Global commercial EV market by 2026, entering hyper-growth</div></div>
+    <div class="stat"><div class="big">14×</div><div class="label">Light commercial EV demand: 1.14M units today to 16M+ by 2035</div></div>
+    <div class="stat"><div class="big">SEA</div><div class="label">Our focus: Southeast Asia, where OEM production meets infrastructure buildout</div></div>
+  </div>
+  <div class="foot"><img src="amargi-logo.png" alt=""><span>Series A · Confidential</span><span>03</span></div>
+</section>
+
+<!-- 4 · PROBLEM -->
+<section class="slide">
+  <p class="eyebrow">03 · The problem</p>
+  <h2>Standard EVs fail modern fleets</h2>
+  <div class="grid cols-2">
+    <div class="card"><div class="num">01</div><h3>Cost and supply barriers</h3><p>Operators need large electric buses and taxis but face high upfront costs and unreliable supply chains.</p></div>
+    <div class="card"><div class="num">02</div><h3>Fragmented spare parts</h3><p>Critical EV components take weeks to arrive, and every idle day is lost revenue for an operator.</p></div>
+    <div class="card"><div class="num">03</div><h3>Charging infrastructure gaps</h3><p>Grid strain, slow deployment, and high operating costs make depot charging painful to run.</p></div>
+    <div class="card"><div class="num">04</div><h3>Policy urgency, messy execution</h3><p>Singapore's 2040 EV vision and 2030 bus electrification targets, with regional mandates following, create demand faster than operators can execute.</p></div>
+  </div>
+  <div class="foot"><img src="amargi-logo.png" alt=""><span>Series A · Confidential</span><span>04</span></div>
+</section>
+
+<!-- 5 · SOLUTION -->
+<section class="slide">
+  <p class="eyebrow">04 · Our solution</p>
+  <h2>The resell · charge · parts flywheel</h2>
+  <div class="grid cols-3">
+    <div class="card"><div class="num">RESELL</div><h3>Commercial EV sales</h3><p>Large electric buses and e-taxis through proven OEM partnerships, an asset-light reseller model.</p></div>
+    <div class="card"><div class="num">CHARGE</div><h3>Solar charging hubs</h3><p>On-site solar generation, battery storage, and fast DC charging built for fleet schedules.</p></div>
+    <div class="card"><div class="num">PARTS</div><h3>Spare parts wholesale</h3><p>Regional inventory hub for batteries, motors, AC/DC components, tyres, and brake parts.</p></div>
+  </div>
+  <p class="lede" style="margin-top: 40px; color: var(--accent);">One-stop shop: vehicles → parts → renewable charging. Each arm feeds the next.</p>
+  <div class="foot"><img src="amargi-logo.png" alt=""><span>Series A · Confidential</span><span>05</span></div>
+</section>
+
+<!-- 6 · OPPORTUNITY -->
+<section class="slide">
+  <p class="eyebrow">05 · Market opportunity</p>
+  <h2>A S$680M beachhead, a regional runway</h2>
+  <div class="grid cols-2" style="grid-template-columns: 1fr 1fr;">
+    <div class="card stat"><div class="big" style="font-size:96px">5,800</div><div class="label">Singapore buses mandated 100% electric by 2040, yet only 240 are electric today</div></div>
+    <div class="card stat"><div class="big" style="font-size:96px">60,000</div><div class="label">Singapore taxis electrifying fast: 2,500 electric on the road across Strides, ComfortDelGro, and SMRT</div></div>
+    <div class="card stat"><div class="big" style="font-size:96px">S$680M</div><div class="label">Five-year addressable market across vehicle sales, parts, and charging</div></div>
+    <div class="card stat"><div class="big" style="font-size:96px">S$30B</div><div class="label">Projected EV component and commercial vehicle market by 2035</div></div>
+  </div>
+  <p class="lede" style="margin-top: 36px;">Regional expansion runway: <span style="color: var(--accent);">Malaysia · Thailand · Indonesia · Philippines</span></p>
+  <div class="foot"><img src="amargi-logo.png" alt=""><span>Series A · Confidential</span><span>06</span></div>
+</section>
+
+<!-- 7 · BUSINESS MODEL -->
+<section class="slide">
+  <p class="eyebrow">06 · Business model</p>
+  <h2>Four streams, one blended margin</h2>
+  <table>
+    <tr><th>Revenue stream</th><th>Description</th><th>Gross margin</th></tr>
+    <tr><td>Vehicle resale</td><td>15-18% commission / markup on bus and e-taxi sales</td><td class="gold">10-15%</td></tr>
+    <tr><td>Parts wholesale</td><td>B2B bulk spare parts with high repeat order rates</td><td class="gold">25-40%</td></tr>
+    <tr><td>Charging hubs</td><td>Pay-per-use charging plus fleet subscriptions</td><td class="gold">40-50%</td></tr>
+    <tr><td>Solar energy sales</td><td>Excess solar sold to grid, offsetting charging costs</td><td class="gold">20-25%</td></tr>
+  </table>
+  <p class="lede" style="margin-top: 36px; color: var(--accent);">Blended gross margin target: 25-30%</p>
+  <div class="foot"><img src="amargi-logo.png" alt=""><span>Series A · Confidential</span><span>07</span></div>
+</section>
+
+<!-- 8 · CHARGING HUBS -->
+<section class="slide">
+  <div class="slide-bg"><img src="https://images.unsplash.com/photo-1593941707874-ef25b8b4a92b?q=70&w=1920&auto=format&fit=crop" alt=""></div>
+  <p class="eyebrow">07 · Recurring revenue</p>
+  <h2>Charge &amp; Save</h2>
+  <div style="max-width: 1050px;">
+    <div class="ticks" style="margin-bottom: 56px;">
+      <div class="tick">Fleet operators pay a monthly subscription for access to our solar-storage charging hubs</div>
+      <div class="tick">We charge S$0.25/kWh against a S$0.35 grid rate: the client saves, we keep the margin plus renewable energy certificates</div>
+      <div class="tick">Solar and storage integration lowers charging cost by 35% versus grid-only</div>
+      <div class="tick">Hubs anchor loyalty: charging customers buy vehicles and parts from the same ecosystem</div>
+    </div>
+    <div style="display: flex; gap: 80px;">
+      <div class="stat"><div class="big">S$0.25</div><div class="label">Our rate per kWh</div></div>
+      <div class="stat"><div class="big" style="color: rgba(255,255,255,0.45);">S$0.35</div><div class="label">Grid rate per kWh</div></div>
+      <div class="stat"><div class="big">−35%</div><div class="label">Charging cost vs grid-only</div></div>
+    </div>
+  </div>
+  <div class="foot"><img src="amargi-logo.png" alt=""><span>Series A · Confidential</span><span>08</span></div>
+</section>
+
+<!-- 9 · MOAT -->
+<section class="slide">
+  <p class="eyebrow">08 · Why we win</p>
+  <h2>Six layers of moat</h2>
+  <div class="grid cols-3">
+    <div class="card"><h3>Licensed &amp; compliant</h3><p>Fully licensed under Singapore's strict EV import and charging regulations.</p></div>
+    <div class="card"><h3>Solar + storage edge</h3><p>35% cheaper charging than grid-only competitors, with RE certificate upside.</p></div>
+    <div class="card"><h3>Deep parts inventory</h3><p>Inverters, charging interfaces, and EV sensors in stock for minimal downtime versus new entrants, plus lifetime service contracts.</p></div>
+    <div class="card"><h3>First mover</h3><p>The first integrated hub ecosystem for commercial fleets in the region.</p></div>
+    <div class="card"><h3>12-year relationships</h3><p>Established sales relationships with LTA, bus depots, and taxi companies.</p></div>
+    <div class="card"><h3>Real unit economics</h3><p>S$70k-400k resale margin per BYD bus/truck and Wuling/Linxys van; S$10-15k per e-taxi.</p></div>
+  </div>
+  <div class="foot"><img src="amargi-logo.png" alt=""><span>Series A · Confidential</span><span>09</span></div>
+</section>
+
+<!-- 10 · SERIES A STRUCTURE -->
+<section class="slide">
+  <p class="eyebrow">09 · Series A structure</p>
+  <h2>Convertible bonds, by design</h2>
+  <div class="grid cols-3">
+    <div class="card"><div class="num">01</div><h3>Investment protection</h3><p>Bond structure ranks ahead of equity, so capital is protected while the business scales.</p></div>
+    <div class="card"><div class="num">02</div><h3>Conversion incentives</h3><p>Convert into equity at preferential terms as milestones are hit: upside without re-negotiation.</p></div>
+    <div class="card"><div class="num">03</div><h3>Yield potential</h3><p>Coupon income from day one, backed by secured assets against an upscaling revenue stream.</p></div>
+  </div>
+  <div class="foot"><img src="amargi-logo.png" alt=""><span>Series A · Confidential</span><span>10</span></div>
+</section>
+
+<!-- 11 · USE OF FUNDS -->
+<section class="slide">
+  <p class="eyebrow">10 · Use of funds</p>
+  <h2>S$9.9M, deployed for scale</h2>
+  <div style="margin-top: 20px;">
+    <div class="bar-row"><span class="use">Vehicle inventory: pre-order buses &amp; taxis at bulk discount</span><div class="bar"><i style="width: 100%"></i></div><span class="amt">S$4.0M</span></div>
+    <div class="bar-row"><span class="use">Three solar charging hubs: east, north, west</span><div class="bar"><i style="width: 75%"></i></div><span class="amt">S$3.0M</span></div>
+    <div class="bar-row"><span class="use">Spare parts warehousing &amp; logistics</span><div class="bar"><i style="width: 30%"></i></div><span class="amt">S$1.2M</span></div>
+    <div class="bar-row"><span class="use">AI fleet platform: charging bookings, parts ordering</span><div class="bar"><i style="width: 25%"></i></div><span class="amt">S$1.0M</span></div>
+    <div class="bar-row"><span class="use">Team &amp; sales: fleet sales, operations, engineering</span><div class="bar"><i style="width: 17.5%"></i></div><span class="amt">S$0.7M</span></div>
+  </div>
+  <div class="foot"><img src="amargi-logo.png" alt=""><span>Series A · Confidential</span><span>11</span></div>
+</section>
+
+<!-- 12 · ROADMAP -->
+<section class="slide">
+  <p class="eyebrow">11 · Roadmap</p>
+  <h2>Scaling to 50,000 vehicles</h2>
+  <div class="grid cols-3">
+    <div class="card"><div class="num">2026</div><h3>Series A &amp; hubs</h3><p>Close the round, secure vehicle inventory, energise the first solar charging hubs.</p></div>
+    <div class="card"><div class="num">2027</div><h3>Scale inventory</h3><p>Expand parts warehousing and vehicle stock; deepen operator subscriptions.</p></div>
+    <div class="card"><div class="num">2028</div><h3>50,000+ vehicles</h3><p>Regional scale across SEA. Exit paths: acquisition by a regional energy or mobility player, or IPO on SGX Catalist / Nasdaq.</p></div>
+  </div>
+  <div class="foot"><img src="amargi-logo.png" alt=""><span>Series A · Confidential</span><span>12</span></div>
+</section>
+
+<!-- 13 · CLOSING -->
+<section class="slide" style="justify-content: center; text-align: center; align-items: center;">
+  <div class="slide-bg"><img src="https://images.unsplash.com/photo-1753264073167-e266a10385f9?q=70&w=1920&auto=format&fit=crop" alt=""><div style="position:absolute;inset:0;background:rgba(8,22,20,0.82)"></div></div>
+  <img src="amargi-logo.png" style="height: 100px; width: auto; margin-bottom: 52px;" alt="Amargi Carriage">
+  <h1 style="font-size: 100px;">Join the quiet revolution.</h1>
+  <p class="lede" style="margin-top: 40px;">Jeremiah Ng · CFOO · Jeremiah@amagi.sg</p>
+  <div class="foot"><span>Series A · 2026</span><span>Amargi Carriage Pte. Ltd.</span><span>13</span></div>
+</section>
+
+</body>
+</html>
